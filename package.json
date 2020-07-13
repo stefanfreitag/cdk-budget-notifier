@@ -1,8 +1,8 @@
 {
-  "name": "monthly_budget_notifier",
+  "name": "budget_notifier",
   "version": "0.1.0",
   "bin": {
-    "monthly_budget_notifier": "bin/monthly_budget_notifier.js"
+    "budget_notifier": "bin/budget_notifier.js"
   },
   "scripts": {
     "build": "tsc",
