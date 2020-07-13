@@ -1,0 +1,17 @@
+pull_request_rules:
+    - name: Automatic merge on approval
+      actions:
+        merge:
+          strict: smart
+          method: squash
+          strict_method: merge
+        request_reviews:
+          users:
+           - stefanfreitag
+        delete_head_branch: {}
+        dismiss_reviews: {}
+      conditions:
+      - author!=renovate[bot]
+      - status-success=Semantic Pull Request
+      - status-success=Codacy/PR Quality Review
+      - -closed
