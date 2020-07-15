@@ -9,13 +9,26 @@ export interface BudgetNotifierProps extends StackProps {
    */
   readonly recipient: string;
 
-  readonly application?: string;
-
-  readonly costCenter?: string;
   /**
-   * 
+   * If specified the application name will be added as tag filter.
+   */
+  readonly application?: string;
+  /**
+   * If specified the cost center will be added as tag filter.
+   */
+  readonly costCenter?: string;
+
+  /**
+   * The threshold value in percent (0-100).
+   */
+  readonly threshold: number;
+  /**
+   * The cost associated with the budget threshold.
    */
   readonly limit: number;
+  /**
+   * The unit of measurement that is used for the budget threshold, such as dollars or GB.
+   */
   readonly unit: string;
 }
 
@@ -23,16 +36,19 @@ export class BudgetNotifierStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: BudgetNotifierProps) {
     super(scope, id, props);
 
+    const tags: Array<string> = [];
 
-    const tags: Array<string>= []
-    //"user:Application$storm", "user:CostCenter$XYZ"
+
+    if (props.threshold <=0) {
+      throw new Error('Thresholds less than or equal to 0 are not allowed.');
+    }
 
     if (props.application) {
-      tags.push("user:Application$" + props.application)
+      tags.push("user:Application$" + props.application);
     }
-    
+
     if (props.costCenter) {
-      tags.push("user:CostCenter$" + props.costCenter)
+      tags.push("user:Cost Center$" + props.costCenter);
     }
 
     new CfnBudget(this, "OverallMonthlyBudget", {
@@ -45,14 +61,14 @@ export class BudgetNotifierStack extends cdk.Stack {
         },
         costFilters: {
           AZ: ["eu-central-1"],
-          TagKeyValue: tags
+          TagKeyValue: tags,
         },
       },
       notificationsWithSubscribers: [
         {
           notification: {
             comparisonOperator: "GREATER_THAN",
-            threshold: 80,
+            threshold: props.threshold,
             thresholdType: "PERCENTAGE",
             notificationType: "ACTUAL",
           },

@@ -4,6 +4,13 @@
   "bin": {
     "budget_notifier": "bin/budget_notifier.js"
   },
+  "author": {
+    "name": "Stefan Freitag",
+    "email": "stefan@stefreitag.de"
+  },
+  "repository": {
+    "url": "git://github.com/stefanfreitag/cdk-budget-notifier.git"
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -24,5 +31,8 @@
     "@aws-cdk/aws-budgets": "1.51.0",
     "@aws-cdk/core": "1.51.0",
     "source-map-support": "0.5.19"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
