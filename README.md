@@ -4,17 +4,21 @@ Setup AWS Budget notifications using AWS CDK.
 By default notifications are sent via e-mail.
 
 
-## Configuration
+## Configuration options
 
-Keys:
+- Budget
+  - `limit`: The budget limit
+  - `unit`: The unit of measurement for the limit, e.g. USD.
+- Cost Filters
+  - `application`: If specified the application (name) will be added as tag filter.
+  - `costcenter`: If specified the cost center will be added as tag filter.
+  - `service`: If specified the service (e.g. Lambda, EC2)will be added as tag filter.
+- Notification
+  - `recipient`: Notifications are sent to this e-mail address
+  - `threshold`:  Notifications are triggered if `treshold` percent of the budget are exceeded.
 
-- recipient:
-- application:
-- costcenter:
-- limit:
-- unit:
+## Example
 
-Example of supported configuration keys:
 ```json
 {
    recipient: "stefan@stefreitag.de",

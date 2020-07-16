@@ -148,6 +148,52 @@ test("Single monthly budget for application", () => {
   );
 });
 
+test("Single monthly budget for application and service", () => {
+  const app = new cdk.App();
+
+  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+    recipient: "stefan@stefreitag.de",
+    application: "HelloWorld",
+    service: "Lambda",
+    limit: 10,
+    unit: "USD",
+    threshold: 50,
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {
+      Budget: {
+        BudgetLimit: {
+          Amount: 10,
+          Unit: "USD",
+        },
+        BudgetType: "COST",
+
+        CostFilters: {
+          AZ: ["eu-central-1"],
+          TagKeyValue: ["user:Application$HelloWorld", "user:Service$Lambda"],
+        },
+      },
+      NotificationsWithSubscribers: [
+        {
+          Notification: {
+            ComparisonOperator: "GREATER_THAN",
+            NotificationType: "ACTUAL",
+            Threshold: 50,
+            ThresholdType: "PERCENTAGE",
+          },
+          Subscribers: [
+            {
+              Address: "stefan@stefreitag.de",
+              SubscriptionType: "EMAIL",
+            },
+          ],
+        },
+      ],
+    })
+  );
+});
+
 test("Negative threshold is not allowed", () => {
   const app = new cdk.App();
 
