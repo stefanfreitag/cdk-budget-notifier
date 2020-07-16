@@ -19,6 +19,10 @@ export interface BudgetNotifierProps extends StackProps {
   readonly costCenter?: string;
 
   /**
+   * If specified the service will be added as tag filter.
+   */
+  readonly service?: string;
+  /**
    * The threshold value in percent (0-100).
    */
   readonly threshold: number;
@@ -38,9 +42,8 @@ export class BudgetNotifierStack extends cdk.Stack {
 
     const tags: Array<string> = [];
 
-
-    if (props.threshold <=0) {
-      throw new Error('Thresholds less than or equal to 0 are not allowed.');
+    if (props.threshold <= 0) {
+      throw new Error("Thresholds less than or equal to 0 are not allowed.");
     }
 
     if (props.application) {
@@ -49,6 +52,10 @@ export class BudgetNotifierStack extends cdk.Stack {
 
     if (props.costCenter) {
       tags.push("user:Cost Center$" + props.costCenter);
+    }
+
+    if (props.service) {
+      tags.push("user:Service$" + props.service);
     }
 
     new CfnBudget(this, "OverallMonthlyBudget", {
