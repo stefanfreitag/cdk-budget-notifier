@@ -5,9 +5,9 @@ import { StackProps } from "@aws-cdk/core";
 
 export interface BudgetNotifierProps extends StackProps {
   /**
-   * Budget notifications will be sent to this e-mail address.
+   * Budget notifications will be sent to each of the recipients (e-mail addresses).
    */
-  readonly recipient: string;
+  readonly recipients: Array<string>;
 
   /**
    * If specified the application name will be added as tag filter.
@@ -58,6 +58,15 @@ export class BudgetNotifierStack extends cdk.Stack {
       tags.push("user:Service$" + props.service);
     }
 
+    const subscribers = new Array<CfnBudget.SubscriberProperty>();
+
+    for (const recipient of props.recipients) {
+      subscribers.push({
+        address: recipient,
+        subscriptionType: "EMAIL",
+      });
+    }
+
     new CfnBudget(this, "OverallMonthlyBudget", {
       budget: {
         budgetType: "COST",
@@ -79,12 +88,7 @@ export class BudgetNotifierStack extends cdk.Stack {
             thresholdType: "PERCENTAGE",
             notificationType: "ACTUAL",
           },
-          subscribers: [
-            {
-              address: props.recipient,
-              subscriptionType: "EMAIL",
-            },
-          ],
+          subscribers: subscribers,
         },
       ],
     });
