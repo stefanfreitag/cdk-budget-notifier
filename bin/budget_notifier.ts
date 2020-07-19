@@ -5,7 +5,7 @@ import { BudgetNotifierStack } from "../lib/budget_notifier-stack";
 
 const app = new cdk.App();
 new BudgetNotifierStack(app, "BudgetNotifierStack", {
-  recipient: "stefan@stefreitag.de",
+  recipients: ["stefan@stefreitag.de"],
   application: "HelloWorld",
   costCenter: "myCostCenter",
   limit: 10,

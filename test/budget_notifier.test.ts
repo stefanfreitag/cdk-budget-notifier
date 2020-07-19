@@ -13,7 +13,7 @@ test("Single monthly budget for cost center", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
-    recipient: "stefan@stefreitag.de",
+    recipients: ["john.doe@foo.bar"],
     costCenter: "myCostCenter",
     limit: 10,
     unit: "USD",
@@ -44,7 +44,7 @@ test("Single monthly budget for cost center", () => {
           },
           Subscribers: [
             {
-              Address: "stefan@stefreitag.de",
+              Address: "john.doe@foo.bar",
               SubscriptionType: "EMAIL",
             },
           ],
@@ -58,7 +58,7 @@ test("Single monthly budget for application and cost center", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
-    recipient: "stefan@stefreitag.de",
+    recipients: ["john.doe@foo.bar"],
     application: "HelloWorld",
     costCenter: "myCostCenter",
     limit: 10,
@@ -93,7 +93,7 @@ test("Single monthly budget for application and cost center", () => {
           },
           Subscribers: [
             {
-              Address: "stefan@stefreitag.de",
+              Address: "john.doe@foo.bar",
               SubscriptionType: "EMAIL",
             },
           ],
@@ -107,7 +107,7 @@ test("Single monthly budget for application", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
-    recipient: "stefan@stefreitag.de",
+    recipients: ["john.doe@foo.bar"],
     application: "HelloWorld",
     limit: 10,
     unit: "USD",
@@ -138,7 +138,7 @@ test("Single monthly budget for application", () => {
           },
           Subscribers: [
             {
-              Address: "stefan@stefreitag.de",
+              Address: "john.doe@foo.bar",
               SubscriptionType: "EMAIL",
             },
           ],
@@ -152,7 +152,7 @@ test("Single monthly budget for application and service", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
-    recipient: "stefan@stefreitag.de",
+    recipients: ["john.doe@foo.bar"],
     application: "HelloWorld",
     service: "Lambda",
     limit: 10,
@@ -184,7 +184,39 @@ test("Single monthly budget for application and service", () => {
           },
           Subscribers: [
             {
-              Address: "stefan@stefreitag.de",
+              Address: "john.doe@foo.bar",
+              SubscriptionType: "EMAIL",
+            },
+          ],
+        },
+      ],
+    })
+  );
+});
+
+test("Multiple subscribers", () => {
+  const app = new cdk.App();
+
+  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+    recipients: ["john.doe@foo.bar", "sally.sixpack@foo.bar"],
+    application: "HelloWorld",
+    service: "Lambda",
+    limit: 10,
+    unit: "USD",
+    threshold: 50,
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {
+      NotificationsWithSubscribers: [
+        {
+          Subscribers: [
+            {
+              Address: "john.doe@foo.bar",
+              SubscriptionType: "EMAIL",
+            },
+            {
+              Address: "sally.sixpack@foo.bar",
               SubscriptionType: "EMAIL",
             },
           ],
@@ -199,7 +231,7 @@ test("Negative threshold is not allowed", () => {
 
   expect(() => {
     new BudgetNotifierStack(app, "MyTestStack", {
-      recipient: "stefan@stefreitag.de",
+      recipients: ["john.doe@foo.bar"],
       application: "HelloWorld",
       limit: 10,
       unit: "USD",
