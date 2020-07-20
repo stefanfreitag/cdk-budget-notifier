@@ -9,11 +9,12 @@ import * as cdk from "@aws-cdk/core";
 import * as BudgetNotifier from "../lib/budget_notifier-stack";
 import { BudgetNotifierStack } from "../lib/budget_notifier-stack";
 
-test("Single monthly budget for cost center", () => {
+test("Budget with cost center and AZ filter", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
     recipients: ["john.doe@foo.bar"],
+    availabilityZones: ["eu-central-1"],
     costCenter: "myCostCenter",
     limit: 10,
     unit: "USD",
@@ -54,11 +55,12 @@ test("Single monthly budget for cost center", () => {
   );
 });
 
-test("Single monthly budget for application and cost center", () => {
+test("Budget with application, AZ, and cost center filter", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
     recipients: ["john.doe@foo.bar"],
+    availabilityZones: ["eu-central-1"],
     application: "HelloWorld",
     costCenter: "myCostCenter",
     limit: 10,
@@ -103,11 +105,12 @@ test("Single monthly budget for application and cost center", () => {
   );
 });
 
-test("Single monthly budget for application", () => {
+test("Budget for application and AZ filter", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
     recipients: ["john.doe@foo.bar"],
+    availabilityZones: ["eu-central-1"],
     application: "HelloWorld",
     limit: 10,
     unit: "USD",
@@ -148,12 +151,13 @@ test("Single monthly budget for application", () => {
   );
 });
 
-test("Single monthly budget for application and service", () => {
+test("Budget for application, AZ and service filter", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
     recipients: ["john.doe@foo.bar"],
     application: "HelloWorld",
+    availabilityZones: ["eu-central-1"],
     service: "Lambda",
     limit: 10,
     unit: "USD",
@@ -194,11 +198,59 @@ test("Single monthly budget for application and service", () => {
   );
 });
 
-test("Multiple subscribers", () => {
+
+test("Budget for multiple AZ", () => {
+  const app = new cdk.App();
+
+  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+    recipients: ["john.doe@foo.bar"],
+    availabilityZones: ["eu-central-1", "eu-west-1"],
+    limit: 10,
+    unit: "USD",
+    threshold: 50,
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {
+      Budget: {
+        BudgetLimit: {
+          Amount: 10,
+          Unit: "USD",
+        },
+        BudgetType: "COST",
+
+        CostFilters: {
+          AZ: ["eu-central-1", "eu-west-1"]          
+        },
+      },
+      NotificationsWithSubscribers: [
+        {
+          Notification: {
+            ComparisonOperator: "GREATER_THAN",
+            NotificationType: "ACTUAL",
+            Threshold: 50,
+            ThresholdType: "PERCENTAGE",
+          },
+          Subscribers: [
+            {
+              Address: "john.doe@foo.bar",
+              SubscriptionType: "EMAIL",
+            },
+          ],
+        },
+      ],
+    })
+  );
+});
+
+
+
+test("Support for multiple subscribers", () => {
   const app = new cdk.App();
 
   const stack = new BudgetNotifierStack(app, "MyTestStack", {
     recipients: ["john.doe@foo.bar", "sally.sixpack@foo.bar"],
+    availabilityZones: ["eu-central-1"],
     application: "HelloWorld",
     service: "Lambda",
     limit: 10,
@@ -232,6 +284,7 @@ test("Negative threshold is not allowed", () => {
   expect(() => {
     new BudgetNotifierStack(app, "MyTestStack", {
       recipients: ["john.doe@foo.bar"],
+      availabilityZones: ["eu-central-1"],
       application: "HelloWorld",
       limit: 10,
       unit: "USD",
