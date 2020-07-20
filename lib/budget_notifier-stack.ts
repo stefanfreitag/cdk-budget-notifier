@@ -10,6 +10,10 @@ export interface BudgetNotifierProps extends StackProps {
   readonly recipients: Array<string>;
 
   /**
+   * If specified the availability zones will be added as tag filter.
+   */
+  readonly availabilityZones?: Array<string>;
+  /**
    * If specified the application name will be added as tag filter.
    */
   readonly application?: string;
@@ -40,34 +44,14 @@ export class BudgetNotifierStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: BudgetNotifierProps) {
     super(scope, id, props);
 
-    const tags: Array<string> = [];
-
     if (props.threshold <= 0) {
       throw new Error("Thresholds less than or equal to 0 are not allowed.");
     }
 
-    if (props.application) {
-      tags.push("user:Application$" + props.application);
-    }
+    const costFilters = this.createCostFilters(props);
+    const subscribers = this.createSubscribers(props);
 
-    if (props.costCenter) {
-      tags.push("user:Cost Center$" + props.costCenter);
-    }
-
-    if (props.service) {
-      tags.push("user:Service$" + props.service);
-    }
-
-    const subscribers = new Array<CfnBudget.SubscriberProperty>();
-
-    for (const recipient of props.recipients) {
-      subscribers.push({
-        address: recipient,
-        subscriptionType: "EMAIL",
-      });
-    }
-
-    new CfnBudget(this, "OverallMonthlyBudget", {
+    const budget = new CfnBudget(this, "OverallMonthlyBudget", {
       budget: {
         budgetType: "COST",
         timeUnit: "MONTHLY",
@@ -75,10 +59,7 @@ export class BudgetNotifierStack extends cdk.Stack {
           amount: props.limit,
           unit: props.unit,
         },
-        costFilters: {
-          AZ: ["eu-central-1"],
-          TagKeyValue: tags,
-        },
+        costFilters: costFilters,
       },
       notificationsWithSubscribers: [
         {
@@ -92,5 +73,46 @@ export class BudgetNotifierStack extends cdk.Stack {
         },
       ],
     });
+  }
+
+  private createSubscribers(props: BudgetNotifierProps) {
+    const subscribers = new Array<CfnBudget.SubscriberProperty>();
+
+    for (const recipient of props.recipients) {
+      subscribers.push({
+        address: recipient,
+        subscriptionType: "EMAIL",
+      });
+    }
+    return subscribers;
+  }
+
+  private createCostFilters(props: BudgetNotifierProps) {
+    const tags: Array<string> = [];
+    if (props.application) {
+      tags.push("user:Application$" + props.application);
+    }
+
+    if (props.costCenter) {
+      tags.push("user:Cost Center$" + props.costCenter);
+    }
+
+    if (props.service) {
+      tags.push("user:Service$" + props.service);
+    }
+
+    const costFilters: any = {};
+
+    if (tags) {
+      costFilters["TagKeyValue"] = tags;
+    }
+    const availabilityZones: Array<string> = [];
+    if (props.availabilityZones) {
+      for (const az of props.availabilityZones) {
+        availabilityZones.push(az);
+      }
+      costFilters["AZ"] = availabilityZones;
+    }
+    return costFilters;
   }
 }

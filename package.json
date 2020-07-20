@@ -1,6 +1,6 @@
 {
-  "name": "budget_notifier",
-  "version": "0.1.0",
+  "name": "@stefanfreitag/aws-budget-notifier",
+  "version": "0.1.1",
   "bin": {
     "budget_notifier": "bin/budget_notifier.js"
   },
@@ -9,8 +9,11 @@
     "email": "stefan@stefreitag.de"
   },
   "repository": {
-    "url": "git://github.com/stefanfreitag/cdk-budget-notifier.git"
+    "url": "git://github.com/stefanfreitag/cdk-budget-notifier.git",
+    "type": "git"
   },
+  "keywords": [ "aws", "cdk", "budget"],
+  "license": "Apache-2.0",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -33,6 +36,7 @@
     "source-map-support": "0.5.19"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
   }
 }

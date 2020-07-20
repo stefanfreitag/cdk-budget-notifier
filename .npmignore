@@ -4,3 +4,8 @@
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+test
+renovate.json
+.circleci
+.mergify.yml
