@@ -6,13 +6,13 @@ import {
   haveResourceLike,
 } from "@aws-cdk/assert";
 import * as cdk from "@aws-cdk/core";
-import * as BudgetNotifier from "../lib/budget_notifier-stack";
-import { BudgetNotifierStack } from "../lib/budget_notifier-stack";
+import { Stack } from "@aws-cdk/core";
+import { BudgetNotifier } from "../lib/budget_notifier";
 
 test("Budget with cost center and AZ filter", () => {
-  const app = new cdk.App();
+  const stack = new Stack();
 
-  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+  new BudgetNotifier(stack, "notifier", {
     recipients: ["john.doe@foo.bar"],
     availabilityZones: ["eu-central-1"],
     costCenter: "myCostCenter",
@@ -56,9 +56,9 @@ test("Budget with cost center and AZ filter", () => {
 });
 
 test("Budget with application, AZ, and cost center filter", () => {
-  const app = new cdk.App();
+  const stack = new Stack();
 
-  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+  new BudgetNotifier(stack, "notifier", {
     recipients: ["john.doe@foo.bar"],
     availabilityZones: ["eu-central-1"],
     application: "HelloWorld",
@@ -106,9 +106,9 @@ test("Budget with application, AZ, and cost center filter", () => {
 });
 
 test("Budget for application and AZ filter", () => {
-  const app = new cdk.App();
+  const stack = new Stack();
 
-  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+  new BudgetNotifier(stack, "notifier", {
     recipients: ["john.doe@foo.bar"],
     availabilityZones: ["eu-central-1"],
     application: "HelloWorld",
@@ -152,9 +152,9 @@ test("Budget for application and AZ filter", () => {
 });
 
 test("Budget for application, AZ and service filter", () => {
-  const app = new cdk.App();
+  const stack = new Stack();
 
-  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+  new BudgetNotifier(stack, "notifier", {
     recipients: ["john.doe@foo.bar"],
     application: "HelloWorld",
     availabilityZones: ["eu-central-1"],
@@ -198,11 +198,10 @@ test("Budget for application, AZ and service filter", () => {
   );
 });
 
-
 test("Budget for multiple AZ", () => {
-  const app = new cdk.App();
+  const stack = new Stack();
 
-  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+  new BudgetNotifier(stack, "notifier", {
     recipients: ["john.doe@foo.bar"],
     availabilityZones: ["eu-central-1", "eu-west-1"],
     limit: 10,
@@ -220,7 +219,7 @@ test("Budget for multiple AZ", () => {
         BudgetType: "COST",
 
         CostFilters: {
-          AZ: ["eu-central-1", "eu-west-1"]          
+          AZ: ["eu-central-1", "eu-west-1"],
         },
       },
       NotificationsWithSubscribers: [
@@ -243,12 +242,12 @@ test("Budget for multiple AZ", () => {
   );
 });
 
-
-
 test("Support for multiple subscribers", () => {
   const app = new cdk.App();
 
-  const stack = new BudgetNotifierStack(app, "MyTestStack", {
+  const stack = new Stack();
+
+  new BudgetNotifier(stack, "notifier", {
     recipients: ["john.doe@foo.bar", "sally.sixpack@foo.bar"],
     availabilityZones: ["eu-central-1"],
     application: "HelloWorld",
@@ -279,10 +278,10 @@ test("Support for multiple subscribers", () => {
 });
 
 test("Negative threshold is not allowed", () => {
-  const app = new cdk.App();
+  const stack = new Stack();
 
   expect(() => {
-    new BudgetNotifierStack(app, "MyTestStack", {
+    new BudgetNotifier(stack, "notifier", {
       recipients: ["john.doe@foo.bar"],
       availabilityZones: ["eu-central-1"],
       application: "HelloWorld",

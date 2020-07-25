@@ -1,9 +1,9 @@
 import * as cdk from "@aws-cdk/core";
 
 import { CfnBudget } from "@aws-cdk/aws-budgets";
-import { StackProps } from "@aws-cdk/core";
+import { StackProps, Construct } from "@aws-cdk/core";
 
-export interface BudgetNotifierProps extends StackProps {
+export interface BudgetNotifierProps {
   /**
    * Budget notifications will be sent to each of the recipients (e-mail addresses).
    */
@@ -40,9 +40,9 @@ export interface BudgetNotifierProps extends StackProps {
   readonly unit: string;
 }
 
-export class BudgetNotifierStack extends cdk.Stack {
+export class BudgetNotifier extends Construct {
   constructor(scope: cdk.Construct, id: string, props: BudgetNotifierProps) {
-    super(scope, id, props);
+    super(scope, id);
 
     if (props.threshold <= 0) {
       throw new Error("Thresholds less than or equal to 0 are not allowed.");

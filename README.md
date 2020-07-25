@@ -22,28 +22,33 @@ By default notifications are sent to all subscribers via e-mail.
   - `recipients`: Notifications are sent to this e-mail addresses
   - `threshold`:  Notifications are triggered if `threshold` percent of the budget are exceeded.
 
-### Example configuration
+### Example usage
 
-```json
-{
-   recipient: [ "stefan@stefreitag.de" ],
-   threshold: 80,
-   availabilityZones: [ "eu-central-1" ],
-   application: "HelloWorld",
-   costCenter: "myCostCenter",
-   limit: 10,
-   unit: "USD",
- }
-```
+```javascript
+import * as cdk from "@aws-cdk/core";
 
-## Installation
+import { CfnBudget } from "@aws-cdk/aws-budgets";
+import { StackProps } from "@aws-cdk/core";
+import { BudgetNotifier } from "./budget_notifier";
 
-```shell
-npm install
-tsc -w
-cdk deploy -profile <aws_profile>
+export class BudgetNotifierStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: StackProps) {
+    super(scope, id, props);
+
+    new BudgetNotifier(this, "test", {
+      recipients: ["john@doe.com"],
+      availabilityZones: ["eu-central-1", "eu-west-1"],
+      application: "HelloWorld",
+      costCenter: "myCostCenter",
+      limit: 10,
+      unit: "USD",
+      threshold: 75,
+    });
+  }
+}
 ```
 
 ## Links
 
+- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)
 - [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)
