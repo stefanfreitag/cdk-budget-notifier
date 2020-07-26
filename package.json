@@ -1,6 +1,6 @@
 {
   "name": "@stefanfreitag/aws-budget-notifier",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "bin": {
     "budget_notifier": "bin/budget_notifier.js"
   },
@@ -22,15 +22,18 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "release-dry": "release-it --dry-run",
+    "release": "release-it"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.54.0",
     "@types/jest": "26.0.7",
     "@types/node": "14.0.26",
-    "jest": "26.1.0",
-    "ts-jest": "26.1.3",
     "aws-cdk": "1.54.0",
+    "jest": "26.1.0",
+    "release-it": "^13.6.6",
+    "ts-jest": "26.1.3",
     "ts-node": "8.10.2",
     "typescript": "3.9.7"
   },
