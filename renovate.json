@@ -1,17 +1,19 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "enabledManagers": ["npm"],
   "packageRules": [
     {
       "packageNames": ["aws-cdk"],
-      "packagePatterns": ["^@aws-cdk/"]
+      "packagePatterns": ["^@aws-cdk/"],
+      "schedule": ["after 9pm on sunday"]
     },
     {
-      "packageNames": ["@types/node", "@types/jest","ts-jest"],
+      "packageNames": ["jest", "@types/jest", "ts-jest"],
+      "extends": ["schedule:monthly"]
+    },
+    {
+      "packageNames": ["@types/node", "typescript"],
       "enabled": false
     }
   ]
-
 }
