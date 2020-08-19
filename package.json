@@ -32,7 +32,7 @@
     "@types/node": "14.0.26",
     "aws-cdk": "1.59.0",
     "jest": "26.2.2",
-    "release-it": "13.6.7",
+    "release-it": "13.6.8",
     "ts-jest": "26.1.4",
     "ts-node": "8.10.2",
     "typescript": "3.9.7"
