@@ -1,7 +1,7 @@
 import * as cdk from "@aws-cdk/core";
 
 import { CfnBudget } from "@aws-cdk/aws-budgets";
-import { StackProps, Construct } from "@aws-cdk/core";
+import { Construct } from "@aws-cdk/core";
 
 export interface BudgetNotifierProps {
   /**
@@ -51,7 +51,7 @@ export class BudgetNotifier extends Construct {
     const costFilters = this.createCostFilters(props);
     const subscribers = this.createSubscribers(props);
 
-    const budget = new CfnBudget(this, "OverallMonthlyBudget", {
+    new CfnBudget(this, "OverallMonthlyBudget", {
       budget: {
         budgetType: "COST",
         timeUnit: "MONTHLY",

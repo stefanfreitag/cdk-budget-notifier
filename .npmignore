@@ -9,3 +9,10 @@ test
 renovate.json
 .circleci
 .mergify.yml
+
+
+# Exclude jsii outdir
+dist
+
+# Include .jsii
+!.jsii

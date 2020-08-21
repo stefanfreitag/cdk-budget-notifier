@@ -1,11 +1,4 @@
-import {
-  expect as expectCDK,
-  matchTemplate,
-  MatchStyle,
-  haveResource,
-  haveResourceLike,
-} from "@aws-cdk/assert";
-import * as cdk from "@aws-cdk/core";
+import { expect as expectCDK, haveResourceLike } from "@aws-cdk/assert";
 import { Stack } from "@aws-cdk/core";
 import { BudgetNotifier } from "../lib/budget_notifier";
 
@@ -243,8 +236,6 @@ test("Budget for multiple AZ", () => {
 });
 
 test("Support for multiple subscribers", () => {
-  const app = new cdk.App();
-
   const stack = new Stack();
 
   new BudgetNotifier(stack, "notifier", {
