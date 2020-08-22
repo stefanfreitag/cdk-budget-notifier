@@ -1,6 +1,8 @@
 {
   "name": "@stefanfreitag/aws-budget-notifier",
   "version": "0.1.4",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "bin": {
     "budget_notifier": "bin/budget_notifier.js"
   },
@@ -19,31 +21,73 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
+    "build": "jsii",
+    "build:watch": "jsii -w",
+    "compile": "jsii --silence-warnings=reserved-word && jsii-docgen",
+    "watch": "jsii -w --silence-warnings=reserved-word",
+    "package": "jsii-pacmak",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:update": "jest --updateSnapshot",
+    "release:jsii": "jsii-release",
+    "release": "release-it",
+    "release:dry-run": "release-it --dry-run",
     "cdk": "cdk",
-    "release-dry": "release-it --dry-run",
-    "release": "release-it"
+    "docgen": "jsii-docgen",
+    "compat": "npx jsii-diff npm:$(node -p \"require('./package.json').name\") -k --ignore-file .compatignore || (echo \"\nUNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .compatignore to skip.\n\" && exit 1)"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.59.0",
-    "@types/jest": "26.0.8",
-    "@types/node": "14.0.26",
-    "aws-cdk": "1.59.0",
-    "jest": "26.2.2",
-    "release-it": "13.6.8",
-    "ts-jest": "26.1.4",
-    "ts-node": "8.10.2",
-    "typescript": "3.9.7"
+    "@aws-cdk/assert": "1.60.0",
+    "@types/jest": "26.0.10",
+    "@types/node": "14.6.0",
+    "aws-cdk": "1.60.0",
+    "jest": "26.4.1",
+    "jsii": "^1.11.0",
+    "jsii-diff": "^1.11.0",
+    "jsii-docgen": "^1.4.22",
+    "jsii-pacmak": "^1.11.0",
+    "jsii-release": "^0.1.9",
+    "release-it": "^13.6.8",
+    "ts-jest": "26.2.0",
+    "ts-node": "9.0.0",
+    "typescript": "4.0.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.59.0",
-    "@aws-cdk/core": "1.59.0",
-    "source-map-support": "0.5.19"
+    "@aws-cdk/aws-budgets": "1.60.0",
+    "@aws-cdk/core": "1.60.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
+  },
+  "stability": "experimental",
+  "jsii": {
+    "outdir": "dist",
+    "targets": {
+      "python": {
+        "distName": "cdk-budget-notifier",
+        "module": "cdk_budget_notifier"
+      },
+      "java": {
+        "package": "io.github.stefanfreitag.cdk.budgetnotifier",
+        "maven": {
+          "groupId": "io.github.stefanfreitag",
+          "artifactId": "cdkBudgetNotifier"
+        }
+      },
+      "dotnet": {
+        "namespace": "De.Freitag.Stefan.Aws.Cdk",
+        "packageId": "CdkBudgetNotifier"
+      }
+    },
+    "tsc": {
+      "outDir": "lib",
+      "rootDir": "src"
+    }
+  },
+  "peerDependencies": {
+    "constructs": "^3.0.4",
+    "@aws-cdk/aws-budgets": "1.60.0",
+    "@aws-cdk/core": "1.60.0"
   }
 }

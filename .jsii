@@ -1,0 +1,384 @@
+{
+  "author": {
+    "email": "stefan@stefreitag.de",
+    "name": "Stefan Freitag",
+    "roles": [
+      "author"
+    ]
+  },
+  "dependencies": {
+    "@aws-cdk/aws-budgets": "1.60.0",
+    "@aws-cdk/core": "1.60.0",
+    "constructs": "^3.0.4"
+  },
+  "dependencyClosure": {
+    "@aws-cdk/aws-budgets": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.Budgets",
+          "packageId": "Amazon.CDK.AWS.Budgets",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "budgets",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.budgets"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-budgets"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-budgets",
+          "module": "aws_cdk.aws_budgets"
+        }
+      }
+    },
+    "@aws-cdk/cloud-assembly-schema": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.CloudAssembly.Schema",
+          "packageId": "Amazon.CDK.CloudAssembly.Schema",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "cdk-cloud-assembly-schema",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.cloudassembly.schema"
+        },
+        "js": {
+          "npm": "@aws-cdk/cloud-assembly-schema"
+        },
+        "python": {
+          "distName": "aws-cdk.cloud-assembly-schema",
+          "module": "aws_cdk.cloud_assembly_schema"
+        }
+      }
+    },
+    "@aws-cdk/core": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK",
+          "packageId": "Amazon.CDK",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "core",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.core"
+        },
+        "js": {
+          "npm": "@aws-cdk/core"
+        },
+        "python": {
+          "distName": "aws-cdk.core",
+          "module": "aws_cdk.core"
+        }
+      }
+    },
+    "@aws-cdk/cx-api": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.CXAPI",
+          "packageId": "Amazon.CDK.CXAPI",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "cdk-cx-api",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.cxapi"
+        },
+        "js": {
+          "npm": "@aws-cdk/cx-api"
+        },
+        "python": {
+          "distName": "aws-cdk.cx-api",
+          "module": "aws_cdk.cx_api"
+        }
+      }
+    },
+    "constructs": {
+      "targets": {
+        "dotnet": {
+          "namespace": "Constructs",
+          "packageId": "Constructs"
+        },
+        "java": {
+          "maven": {
+            "artifactId": "constructs",
+            "groupId": "software.constructs"
+          },
+          "package": "software.constructs"
+        },
+        "js": {
+          "npm": "constructs"
+        },
+        "python": {
+          "distName": "constructs",
+          "module": "constructs"
+        }
+      }
+    }
+  },
+  "description": "@stefanfreitag/aws-budget-notifier",
+  "docs": {
+    "stability": "experimental"
+  },
+  "homepage": "git://github.com/stefanfreitag/cdk-budget-notifier.git",
+  "jsiiVersion": "1.11.0 (build 1e9b8e1)",
+  "keywords": [
+    "aws",
+    "cdk",
+    "budget"
+  ],
+  "license": "Apache-2.0",
+  "name": "@stefanfreitag/aws-budget-notifier",
+  "readme": {
+    "markdown": "#  AWS Budget Notifier\n\nSetup AWS Budget notifications using AWS CDK.\nBy default notifications are sent to all subscribers via e-mail.\n\n\n## Configuration options\n\n- Budget\n  - `limit`: The budget limit, e.g. 10.\n  - `unit`: The unit of measurement for the limit, e.g. USD.\n- Cost Filters<br/>\n\n  | Key  | Description |\n  |---\t|---\t|\n  | `application`\t|  If specified the application (name) is added as tag filter. |\n  | `availabilityZones` | If specified the availability zones (e.g. `eu-central-1`) is added as tag filter. |\n  | `costcenter` \t| If specified the cost center is added as tag filter. |\n  | `service`  \t| If specified the service (e.g. Lambda, EC2) is added as tag filter. |\n\n- Notification\n  - `recipients`: Notifications are sent to this e-mail addresses\n  - `threshold`:  Notifications are triggered if `threshold` percent of the budget are exceeded.\n\n### Example usage\n\n```javascript\nimport * as cdk from \"@aws-cdk/core\";\n\nimport { CfnBudget } from \"@aws-cdk/aws-budgets\";\nimport { StackProps } from \"@aws-cdk/core\";\nimport { BudgetNotifier } from \"./budget_notifier\";\n\nexport class BudgetNotifierStack extends cdk.Stack {\n  constructor(scope: cdk.Construct, id: string, props?: StackProps) {\n    super(scope, id, props);\n\n    new BudgetNotifier(this, \"test\", {\n      recipients: [\"john@doe.com\"],\n      availabilityZones: [\"eu-central-1\", \"eu-west-1\"],\n      application: \"HelloWorld\",\n      costCenter: \"myCostCenter\",\n      limit: 10,\n      unit: \"USD\",\n      threshold: 75,\n    });\n  }\n}\n```\n\n## Links\n\n- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)\n- [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stefanfreitag/cdk-budget-notifier.git"
+  },
+  "schema": "jsii/0.10.0",
+  "targets": {
+    "dotnet": {
+      "namespace": "De.Freitag.Stefan.Aws.Cdk",
+      "packageId": "CdkBudgetNotifier"
+    },
+    "java": {
+      "maven": {
+        "artifactId": "cdkBudgetNotifier",
+        "groupId": "io.github.stefanfreitag"
+      },
+      "package": "io.github.stefanfreitag.cdk.budgetnotifier"
+    },
+    "js": {
+      "npm": "@stefanfreitag/aws-budget-notifier"
+    },
+    "python": {
+      "distName": "cdk-budget-notifier",
+      "module": "cdk_budget_notifier"
+    }
+  },
+  "types": {
+    "@stefanfreitag/aws-budget-notifier.BudgetNotifier": {
+      "assembly": "@stefanfreitag/aws-budget-notifier",
+      "base": "@aws-cdk/core.Construct",
+      "docs": {
+        "stability": "experimental"
+      },
+      "fqn": "@stefanfreitag/aws-budget-notifier.BudgetNotifier",
+      "initializer": {
+        "docs": {
+          "stability": "experimental"
+        },
+        "locationInModule": {
+          "filename": "src/budget_notifier.ts",
+          "line": 44
+        },
+        "parameters": [
+          {
+            "name": "scope",
+            "type": {
+              "fqn": "@aws-cdk/core.Construct"
+            }
+          },
+          {
+            "name": "id",
+            "type": {
+              "primitive": "string"
+            }
+          },
+          {
+            "name": "props",
+            "type": {
+              "fqn": "@stefanfreitag/aws-budget-notifier.BudgetNotifierProps"
+            }
+          }
+        ]
+      },
+      "kind": "class",
+      "locationInModule": {
+        "filename": "src/budget_notifier.ts",
+        "line": 43
+      },
+      "name": "BudgetNotifier"
+    },
+    "@stefanfreitag/aws-budget-notifier.BudgetNotifierProps": {
+      "assembly": "@stefanfreitag/aws-budget-notifier",
+      "datatype": true,
+      "docs": {
+        "stability": "experimental"
+      },
+      "fqn": "@stefanfreitag/aws-budget-notifier.BudgetNotifierProps",
+      "kind": "interface",
+      "locationInModule": {
+        "filename": "src/budget_notifier.ts",
+        "line": 6
+      },
+      "name": "BudgetNotifierProps",
+      "properties": [
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "The cost associated with the budget threshold."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 36
+          },
+          "name": "limit",
+          "type": {
+            "primitive": "number"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "Budget notifications will be sent to each of the recipients (e-mail addresses)."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 10
+          },
+          "name": "recipients",
+          "type": {
+            "collection": {
+              "elementtype": {
+                "primitive": "string"
+              },
+              "kind": "array"
+            }
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "The threshold value in percent (0-100)."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 32
+          },
+          "name": "threshold",
+          "type": {
+            "primitive": "number"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "The unit of measurement that is used for the budget threshold, such as dollars or GB."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 40
+          },
+          "name": "unit",
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "If specified the application name will be added as tag filter."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 19
+          },
+          "name": "application",
+          "optional": true,
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "If specified the availability zones will be added as tag filter."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 15
+          },
+          "name": "availabilityZones",
+          "optional": true,
+          "type": {
+            "collection": {
+              "elementtype": {
+                "primitive": "string"
+              },
+              "kind": "array"
+            }
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "If specified the cost center will be added as tag filter."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 23
+          },
+          "name": "costCenter",
+          "optional": true,
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental",
+            "summary": "If specified the service will be added as tag filter."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 28
+          },
+          "name": "service",
+          "optional": true,
+          "type": {
+            "primitive": "string"
+          }
+        }
+      ]
+    }
+  },
+  "version": "0.1.4",
+  "fingerprint": "JU8N0irQGAPMJW37YES/rBhCAZfRRXvWo/dsnxPNILw="
+}
