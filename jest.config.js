@@ -1,7 +1,9 @@
 module.exports = {
-  roots: ['<rootDir>/test'],
+  "roots": [
+      "./src"
+  ],
   testMatch: ['**/*.test.ts'],
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest'
-  }
+  "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+  },
 };

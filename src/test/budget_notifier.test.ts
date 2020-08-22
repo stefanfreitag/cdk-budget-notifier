@@ -1,6 +1,6 @@
 import { expect as expectCDK, haveResourceLike } from "@aws-cdk/assert";
 import { Stack } from "@aws-cdk/core";
-import { BudgetNotifier } from "../lib/budget_notifier";
+import { BudgetNotifier } from "../budget_notifier";
 
 test("Budget with cost center and AZ filter", () => {
   const stack = new Stack();
