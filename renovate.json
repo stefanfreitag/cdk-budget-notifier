@@ -14,6 +14,10 @@
     {
       "packageNames": ["@types/node", "typescript"],
       "enabled": false
+    },
+    {
+      "packageNames": ["release-it", "husky"],
+      "extends": ["schedule:monthly"]
     }
   ]
 }
