@@ -14,6 +14,14 @@ Name|Description
 [BudgetNotifierProps](#stefanfreitag-aws-budget-notifier-budgetnotifierprops)|*No description*
 
 
+**Enums**
+
+Name|Description
+----|-----------
+[NotificationType](#stefanfreitag-aws-budget-notifier-notificationtype)|*No description*
+[TimeUnit](#stefanfreitag-aws-budget-notifier-timeunit)|*No description*
+
+
 
 ## class BudgetNotifier 🔹 <a id="stefanfreitag-aws-budget-notifier-budgetnotifier"></a>
 
@@ -41,7 +49,9 @@ new BudgetNotifier(scope: Construct, id: string, props: BudgetNotifierProps)
   * **application** (<code>string</code>)  If specified the application name will be added as tag filter. __*Optional*__
   * **availabilityZones** (<code>Array<string></code>)  If specified the availability zones will be added as tag filter. __*Optional*__
   * **costCenter** (<code>string</code>)  If specified the cost center will be added as tag filter. __*Optional*__
+  * **notificationType** (<code>[NotificationType](#stefanfreitag-aws-budget-notifier-notificationtype)</code>)  Whether the notification is for how much you have spent (ACTUAL) or for how much you're forecasted to spend (FORECASTED). __*Optional*__
   * **service** (<code>string</code>)  If specified the service will be added as tag filter. __*Optional*__
+  * **timeUnit** (<code>[TimeUnit](#stefanfreitag-aws-budget-notifier-timeunit)</code>)  The length of time until a budget resets the actual and forecasted spend. __*Optional*__
 
 
 
@@ -62,7 +72,30 @@ Name | Type | Description
 **application**?🔹 | <code>string</code> | If specified the application name will be added as tag filter.<br/>__*Optional*__
 **availabilityZones**?🔹 | <code>Array<string></code> | If specified the availability zones will be added as tag filter.<br/>__*Optional*__
 **costCenter**?🔹 | <code>string</code> | If specified the cost center will be added as tag filter.<br/>__*Optional*__
+**notificationType**?🔹 | <code>[NotificationType](#stefanfreitag-aws-budget-notifier-notificationtype)</code> | Whether the notification is for how much you have spent (ACTUAL) or for how much you're forecasted to spend (FORECASTED).<br/>__*Optional*__
 **service**?🔹 | <code>string</code> | If specified the service will be added as tag filter.<br/>__*Optional*__
+**timeUnit**?🔹 | <code>[TimeUnit](#stefanfreitag-aws-budget-notifier-timeunit)</code> | The length of time until a budget resets the actual and forecasted spend.<br/>__*Optional*__
 
+
+
+## enum NotificationType 🔹 <a id="stefanfreitag-aws-budget-notifier-notificationtype"></a>
+
+
+
+Name | Description
+-----|-----
+**ACTUAL** 🔹|
+**FORECASTED** 🔹|
+
+
+## enum TimeUnit 🔹 <a id="stefanfreitag-aws-budget-notifier-timeunit"></a>
+
+
+
+Name | Description
+-----|-----
+**MONTHLY** 🔹|
+**QUARTERLY** 🔹|
+**ANNUALLY** 🔹|
 
 

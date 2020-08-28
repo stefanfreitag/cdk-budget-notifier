@@ -1,6 +1,8 @@
 import { expect as expectCDK, haveResourceLike } from "@aws-cdk/assert";
 import { Stack } from "@aws-cdk/core";
 import { BudgetNotifier } from "../budget_notifier";
+import { TimeUnit } from "../TimeUnit";
+import { NotificationType } from "../NotificationType";
 
 test("Budget with cost center and AZ filter", () => {
   const stack = new Stack();
@@ -281,4 +283,99 @@ test("Negative threshold is not allowed", () => {
       threshold: -5,
     });
   }).toThrowError(/Thresholds less than or equal to 0 are not allowed./);
+});
+
+test("Support for quarterly time unit", () => {
+  const stack = new Stack();
+
+  new BudgetNotifier(stack, "notifier", {
+    recipients: ["john.doe@foo.bar", "sally.sixpack@foo.bar"],
+    availabilityZones: ["eu-central-1"],
+    application: "HelloWorld",
+    service: "Lambda",
+    limit: 10,
+    unit: "USD",
+    threshold: 50,
+    timeUnit: TimeUnit.QUARTERLY
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {
+      Budget: {
+        BudgetLimit: {
+          Amount: 10,
+          Unit: "USD",
+        },
+        BudgetType: "COST",        
+        CostFilters: {
+          AZ: ["eu-central-1"],
+          TagKeyValue: ["user:Application$HelloWorld", "user:Service$Lambda"],
+        },
+        TimeUnit: "QUARTERLY",
+      }    
+    })
+  );
+});
+
+test("Support for default time unit", () => {
+  const stack = new Stack();
+
+  new BudgetNotifier(stack, "notifier", {
+    recipients: ["john.doe@foo.bar", "sally.sixpack@foo.bar"],
+    availabilityZones: ["eu-central-1"],
+    application: "HelloWorld",
+    service: "Lambda",
+    limit: 10,
+    unit: "USD",
+    threshold: 50
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {
+      Budget: {
+        BudgetLimit: {
+          Amount: 10,
+          Unit: "USD",
+        },
+        BudgetType: "COST",        
+        CostFilters: {
+          AZ: ["eu-central-1"],
+          TagKeyValue: ["user:Application$HelloWorld", "user:Service$Lambda"],
+        },
+        TimeUnit: "MONTHLY",
+      }    
+    })
+  );
+});
+
+
+
+
+test("Support for notification type FORECASTED", () => {
+  const stack = new Stack();
+
+  new BudgetNotifier(stack, "notifier", {
+    recipients: ["john.doe@foo.bar"],
+    availabilityZones: ["eu-central-1"],
+    costCenter: "myCostCenter",
+    limit: 10,
+    unit: "USD",
+    threshold: 50,
+    notificationType: NotificationType.FORECASTED
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {      
+      NotificationsWithSubscribers: [
+        {
+          Notification: {
+            ComparisonOperator: "GREATER_THAN",
+            NotificationType: "FORECASTED",
+            Threshold: 50,
+            ThresholdType: "PERCENTAGE",
+          }          
+        },
+      ],
+    })
+  );
 });
