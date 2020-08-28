@@ -1,7 +1,7 @@
 {
   "name": "@stefanfreitag/aws-budget-notifier",
   "version": "0.1.5",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "types": "src/index.d.ts",
   "bin": {
     "budget_notifier": "bin/budget_notifier.js"
@@ -12,7 +12,7 @@
   },
   "repository": {
     "url": "https://github.com/stefanfreitag/cdk-budget-notifier.git",
-    "type": "git"  
+    "type": "git"
   },
   "keywords": [
     "aws",

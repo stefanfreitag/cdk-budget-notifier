@@ -2,6 +2,8 @@ import * as cdk from "@aws-cdk/core";
 
 import { CfnBudget } from "@aws-cdk/aws-budgets";
 import { Construct } from "@aws-cdk/core";
+import { NotificationType } from "./NotificationType";
+import { TimeUnit } from "./TimeUnit";
 
 export interface BudgetNotifierProps {
   /**
@@ -31,6 +33,11 @@ export interface BudgetNotifierProps {
    */
   readonly threshold: number;
   /**
+   * The length of time until a budget resets the actual and forecasted spend.
+   * @see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-budgetdata.html#cfn-budgets-budget-budgetdata-timeunit
+   */
+  readonly timeUnit?: TimeUnit;
+  /**
    * The cost associated with the budget threshold.
    */
   readonly limit: number;
@@ -38,6 +45,11 @@ export interface BudgetNotifierProps {
    * The unit of measurement that is used for the budget threshold, such as dollars or GB.
    */
   readonly unit: string;
+  /**
+   * Whether the notification is for how much you have spent (ACTUAL) or for how much you're forecasted to spend (FORECASTED).
+   * @see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notification.html#cfn-budgets-budget-notification-notificationtype
+   */
+  readonly notificationType?: NotificationType;
 }
 
 export class BudgetNotifier extends Construct {
@@ -50,11 +62,11 @@ export class BudgetNotifier extends Construct {
 
     const costFilters = this.createCostFilters(props);
     const subscribers = this.createSubscribers(props);
-
-    new CfnBudget(this, "OverallMonthlyBudget", {
+    
+    new CfnBudget(this, "MonthlyBudget_" + id, {
       budget: {
         budgetType: "COST",
-        timeUnit: "MONTHLY",
+        timeUnit: props.timeUnit ? props.timeUnit : TimeUnit.MONTHLY,
         budgetLimit: {
           amount: props.limit,
           unit: props.unit,
@@ -67,7 +79,9 @@ export class BudgetNotifier extends Construct {
             comparisonOperator: "GREATER_THAN",
             threshold: props.threshold,
             thresholdType: "PERCENTAGE",
-            notificationType: "ACTUAL",
+            notificationType: props.notificationType
+              ? props.notificationType
+              : NotificationType.ACTUAL,
           },
           subscribers: subscribers,
         },
