@@ -37,10 +37,10 @@
     "compat": "npx jsii-diff npm:$(node -p \"require('./package.json').name\") -k --ignore-file .compatignore || (echo \"\nUNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .compatignore to skip.\n\" && exit 1)"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.60.0",
+    "@aws-cdk/assert": "1.61.1",
     "@types/jest": "26.0.10",
     "@types/node": "14.6.0",
-    "aws-cdk": "1.60.0",
+    "aws-cdk": "1.61.1",
     "jest": "26.4.1",
     "jsii": "1.12.0",
     "jsii-diff": "1.12.0",
@@ -53,8 +53,8 @@
     "typescript": "4.0.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.60.0",
-    "@aws-cdk/core": "1.60.0"
+    "@aws-cdk/aws-budgets": "1.61.1",
+    "@aws-cdk/core": "1.61.1"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -87,7 +87,7 @@
   },
   "peerDependencies": {
     "constructs": "^3.0.4",
-    "@aws-cdk/aws-budgets": "1.60.0",
-    "@aws-cdk/core": "1.60.0"
+    "@aws-cdk/aws-budgets": "1.61.1",
+    "@aws-cdk/core": "1.61.1"
   }
 }
