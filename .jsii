@@ -7,8 +7,8 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.60.0",
-    "@aws-cdk/core": "1.60.0",
+    "@aws-cdk/aws-budgets": "1.61.1",
+    "@aws-cdk/core": "1.61.1",
     "constructs": "^3.0.4"
   },
   "dependencyClosure": {
@@ -475,6 +475,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.1.5",
-  "fingerprint": "x3pW/yQ783vrwtdvq1pBu7N4WckJXhtQVRsdjKgckUI="
+  "version": "0.2.0",
+  "fingerprint": "1eTzXHNJK8lysgkzBPTlGwI+8sptYhI0utPHUFOiZ20="
 }
