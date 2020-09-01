@@ -41,7 +41,7 @@
     "@types/jest": "26.0.10",
     "@types/node": "14.6.0",
     "aws-cdk": "1.61.1",
-    "jest": "26.4.1",
+    "jest": "26.4.2",
     "jsii": "1.12.0",
     "jsii-diff": "1.12.0",
     "jsii-docgen": "1.4.27",
