@@ -56,10 +56,6 @@
     "@aws-cdk/aws-budgets": "1.61.1",
     "@aws-cdk/core": "1.61.1"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "public"
-  },
   "stability": "experimental",
   "jsii": {
     "outdir": "dist",
