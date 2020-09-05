@@ -5,12 +5,21 @@ import { Construct } from "@aws-cdk/core";
 import { NotificationType } from "./NotificationType";
 import { TimeUnit } from "./TimeUnit";
 
+/**
+ * Configuration options of the {@link BudgetNotifier | BudgetNotifier}.
+ */
 export interface BudgetNotifierProps {
   /**
    * Budget notifications will be sent to each of the recipients (e-mail addresses).
+   * A maximum of 10 recipients is allowed.
    */
-  readonly recipients: Array<string>;
+  readonly recipients?: Array<string>;
 
+  /*
+   * Budget notifications will be sent to this SNS topic. The topic should already exist and needs to have the
+   * correct resource policy setup (Allow service principal to SNS:Publish to the topic)
+   */
+  readonly topicArn?: string;
   /**
    * If specified the availability zones will be added as tag filter.
    */
@@ -56,13 +65,11 @@ export class BudgetNotifier extends Construct {
   constructor(scope: cdk.Construct, id: string, props: BudgetNotifierProps) {
     super(scope, id);
 
-    if (props.threshold <= 0) {
-      throw new Error("Thresholds less than or equal to 0 are not allowed.");
-    }
+    this.validateProperties(props);
 
     const costFilters = this.createCostFilters(props);
     const subscribers = this.createSubscribers(props);
-    
+
     new CfnBudget(this, "MonthlyBudget_" + id, {
       budget: {
         budgetType: "COST",
@@ -73,6 +80,7 @@ export class BudgetNotifier extends Construct {
         },
         costFilters: costFilters,
       },
+
       notificationsWithSubscribers: [
         {
           notification: {
@@ -89,15 +97,35 @@ export class BudgetNotifier extends Construct {
     });
   }
 
+  private validateProperties(props: BudgetNotifierProps): void {
+    if (props.recipients && props.recipients.length > 10) {
+      throw new Error(
+        "The maximum number of 10 e-mail recipients is exceeded."
+      );
+    }
+
+    if (props.threshold <= 0) {
+      throw new Error("Thresholds less than or equal to 0 are not allowed.");
+    }
+  }
+
   private createSubscribers(props: BudgetNotifierProps) {
     const subscribers = new Array<CfnBudget.SubscriberProperty>();
-
-    for (const recipient of props.recipients) {
+    if (props.recipients) {
+      for (const recipient of props.recipients) {
+        subscribers.push({
+          address: recipient,
+          subscriptionType: "EMAIL",
+        });
+      }
+    }
+    if (props.topicArn) {
       subscribers.push({
-        address: recipient,
-        subscriptionType: "EMAIL",
+        address: props.topicArn,
+        subscriptionType: "SNS",
       });
     }
+
     return subscribers;
   }
 
@@ -117,7 +145,7 @@ export class BudgetNotifier extends Construct {
 
     const costFilters: any = {};
 
-    if (tags) {
+    if (tags && tags.length>0) {
       costFilters["TagKeyValue"] = tags;
     }
     const availabilityZones: Array<string> = [];
