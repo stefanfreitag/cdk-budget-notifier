@@ -7,8 +7,10 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.61.1",
-    "@aws-cdk/core": "1.61.1",
+    "@aws-cdk/aws-budgets": "1.62.0",
+    "@aws-cdk/aws-iam": "^1.62.0",
+    "@aws-cdk/aws-sns": "^1.62.0",
+    "@aws-cdk/core": "1.62.0",
     "constructs": "^3.0.4"
   },
   "dependencyClosure": {
@@ -34,6 +36,156 @@
         "python": {
           "distName": "aws-cdk.aws-budgets",
           "module": "aws_cdk.aws_budgets"
+        }
+      }
+    },
+    "@aws-cdk/aws-cloudwatch": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.CloudWatch",
+          "packageId": "Amazon.CDK.AWS.CloudWatch",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "cloudwatch",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.cloudwatch"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-cloudwatch"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-cloudwatch",
+          "module": "aws_cdk.aws_cloudwatch"
+        }
+      }
+    },
+    "@aws-cdk/aws-events": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.Events",
+          "packageId": "Amazon.CDK.AWS.Events",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "events",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.events"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-events"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-events",
+          "module": "aws_cdk.aws_events"
+        }
+      }
+    },
+    "@aws-cdk/aws-iam": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.IAM",
+          "packageId": "Amazon.CDK.AWS.IAM",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "iam",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.iam"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-iam"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-iam",
+          "module": "aws_cdk.aws_iam"
+        }
+      }
+    },
+    "@aws-cdk/aws-kms": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.KMS",
+          "packageId": "Amazon.CDK.AWS.KMS",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "kms",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.kms"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-kms"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-kms",
+          "module": "aws_cdk.aws_kms"
+        }
+      }
+    },
+    "@aws-cdk/aws-sns": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.SNS",
+          "packageId": "Amazon.CDK.AWS.SNS",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "sns",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.sns"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-sns"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-sns",
+          "module": "aws_cdk.aws_sns"
+        }
+      }
+    },
+    "@aws-cdk/aws-sqs": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.SQS",
+          "packageId": "Amazon.CDK.AWS.SQS",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "sqs",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.sqs"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-sqs"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-sqs",
+          "module": "aws_cdk.aws_sqs"
         }
       }
     },
@@ -112,6 +264,31 @@
         }
       }
     },
+    "@aws-cdk/region-info": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.RegionInfo",
+          "packageId": "Amazon.CDK.RegionInfo",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "cdk-region-info",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.regioninfo"
+        },
+        "js": {
+          "npm": "@aws-cdk/region-info"
+        },
+        "python": {
+          "distName": "aws-cdk.region-info",
+          "module": "aws_cdk.region_info"
+        }
+      }
+    },
     "constructs": {
       "targets": {
         "dotnet": {
@@ -149,7 +326,7 @@
   "license": "Apache-2.0",
   "name": "@stefanfreitag/aws-budget-notifier",
   "readme": {
-    "markdown": "# AWS Budget Notifier\n\nSetup AWS Budget notifications using AWS CDK.\nBy default notifications are sent to all subscribers via e-mail.\n\n## Example usage\n\n```javascript\nimport * as cdk from \"@aws-cdk/core\";\n\nimport { CfnBudget } from \"@aws-cdk/aws-budgets\";\nimport { StackProps } from \"@aws-cdk/core\";\nimport { BudgetNotifier } from \"./budget_notifier\";\n\nexport class BudgetNotifierStack extends cdk.Stack {\n  constructor(scope: cdk.Construct, id: string, props?: StackProps) {\n    super(scope, id, props);\n\n    new BudgetNotifier(this, \"test\", {\n      recipients: [\"john@doe.com\"],\n      availabilityZones: [\"eu-central-1\", \"eu-west-1\"],\n      application: \"HelloWorld\",\n      costCenter: \"myCostCenter\",\n      limit: 10,\n      unit: \"USD\",\n      threshold: 75,\n    });\n  }\n}\n```\n\n## Links\n\n- [API documentation](./API.md)\n- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)\n- [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)"
+    "markdown": "# AWS Budget Notifier\n\nSetup a AWS Budget notification using AWS Cloud Development Kit (CDK).\nThe construct supports notifying to\n\n- users via e-mail. Up to 10 e-mail addresses are supported\n- an SNS topic<br>\n  The SNS topic needs to exist and publishing to the topic needs to be allowed.\n\n## Example usage in a CDK Stack\n\n```javascript\nconst app = new cdk.App();\nconst stack = new Stack(app, \"BudgetNotifierStack\");\n\n// Define the SNS topic and setup the resource policy\nconst topic = new Topic(stack, \"topic\");\n\nconst statement = new PolicyStatement({\n  effect: Effect.ALLOW,\n  principals: [new ServicePrincipal(\"budgets.amazonaws.com\")],\n  actions: [\"SNS:Publish\"],\n  sid: \"Allow budget to publish to SNS\"\n});\ntopic.addToResourcePolicy(statement);\n\n// Setup the budget notifier and pass the ARN of the SNS topic\nnew BudgetNotifier(stack, \"notifier\", {\n  topicArn: topic.topicArn,\n  availabilityZones: [\"eu-central-1\"],\n  costCenter: \"myCostCenter\",\n  limit: 10,\n  unit: \"USD\",\n  threshold: 15,\n  notificationType: NotificationType.FORECASTED,\n});\n\n```\n\n## Links\n\n- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)\n- [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)"
   },
   "repository": {
     "type": "git",
@@ -190,7 +367,7 @@
         },
         "locationInModule": {
           "filename": "src/budget_notifier.ts",
-          "line": 56
+          "line": 65
         },
         "parameters": [
           {
@@ -216,7 +393,7 @@
       "kind": "class",
       "locationInModule": {
         "filename": "src/budget_notifier.ts",
-        "line": 55
+        "line": 64
       },
       "name": "BudgetNotifier"
     },
@@ -224,13 +401,14 @@
       "assembly": "@stefanfreitag/aws-budget-notifier",
       "datatype": true,
       "docs": {
-        "stability": "experimental"
+        "stability": "experimental",
+        "summary": "Configuration options of the {@link BudgetNotifier | BudgetNotifier}."
       },
       "fqn": "@stefanfreitag/aws-budget-notifier.BudgetNotifierProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/budget_notifier.ts",
-        "line": 8
+        "line": 11
       },
       "name": "BudgetNotifierProps",
       "properties": [
@@ -243,32 +421,11 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 43
+            "line": 52
           },
           "name": "limit",
           "type": {
             "primitive": "number"
-          }
-        },
-        {
-          "abstract": true,
-          "docs": {
-            "stability": "experimental",
-            "summary": "Budget notifications will be sent to each of the recipients (e-mail addresses)."
-          },
-          "immutable": true,
-          "locationInModule": {
-            "filename": "src/budget_notifier.ts",
-            "line": 12
-          },
-          "name": "recipients",
-          "type": {
-            "collection": {
-              "elementtype": {
-                "primitive": "string"
-              },
-              "kind": "array"
-            }
           }
         },
         {
@@ -280,7 +437,7 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 34
+            "line": 43
           },
           "name": "threshold",
           "type": {
@@ -296,7 +453,7 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 47
+            "line": 56
           },
           "name": "unit",
           "type": {
@@ -312,7 +469,7 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 21
+            "line": 30
           },
           "name": "application",
           "optional": true,
@@ -329,7 +486,7 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 17
+            "line": 26
           },
           "name": "availabilityZones",
           "optional": true,
@@ -351,7 +508,7 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 25
+            "line": 34
           },
           "name": "costCenter",
           "optional": true,
@@ -369,12 +526,35 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 52
+            "line": 61
           },
           "name": "notificationType",
           "optional": true,
           "type": {
             "fqn": "@stefanfreitag/aws-budget-notifier.NotificationType"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "remarks": "A maximum of 10 recipients is allowed.",
+            "stability": "experimental",
+            "summary": "Budget notifications will be sent to each of the recipients (e-mail addresses)."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 16
+          },
+          "name": "recipients",
+          "optional": true,
+          "type": {
+            "collection": {
+              "elementtype": {
+                "primitive": "string"
+              },
+              "kind": "array"
+            }
           }
         },
         {
@@ -386,7 +566,7 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 30
+            "line": 39
           },
           "name": "service",
           "optional": true,
@@ -404,12 +584,28 @@
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 39
+            "line": 48
           },
           "name": "timeUnit",
           "optional": true,
           "type": {
             "fqn": "@stefanfreitag/aws-budget-notifier.TimeUnit"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "stability": "experimental"
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "src/budget_notifier.ts",
+            "line": 22
+          },
+          "name": "topicArn",
+          "optional": true,
+          "type": {
+            "primitive": "string"
           }
         }
       ]
@@ -475,6 +671,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.2.0",
-  "fingerprint": "1eTzXHNJK8lysgkzBPTlGwI+8sptYhI0utPHUFOiZ20="
+  "version": "0.2.3",
+  "fingerprint": "8LaGgb7i+mNVXgLI7eLMfphwC5x07MRQNVaZwVHPbEw="
 }

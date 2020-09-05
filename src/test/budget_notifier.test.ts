@@ -1,4 +1,4 @@
-import { expect as expectCDK, haveResourceLike } from "@aws-cdk/assert";
+import { expect as expectCDK, haveResourceLike, ABSENT } from "@aws-cdk/assert";
 import { Stack } from "@aws-cdk/core";
 import { BudgetNotifier } from "../budget_notifier";
 import { TimeUnit } from "../TimeUnit";
@@ -296,7 +296,7 @@ test("Support for quarterly time unit", () => {
     limit: 10,
     unit: "USD",
     threshold: 50,
-    timeUnit: TimeUnit.QUARTERLY
+    timeUnit: TimeUnit.QUARTERLY,
   });
 
   expectCDK(stack).to(
@@ -306,13 +306,13 @@ test("Support for quarterly time unit", () => {
           Amount: 10,
           Unit: "USD",
         },
-        BudgetType: "COST",        
+        BudgetType: "COST",
         CostFilters: {
           AZ: ["eu-central-1"],
           TagKeyValue: ["user:Application$HelloWorld", "user:Service$Lambda"],
         },
         TimeUnit: "QUARTERLY",
-      }    
+      },
     })
   );
 });
@@ -327,7 +327,7 @@ test("Support for default time unit", () => {
     service: "Lambda",
     limit: 10,
     unit: "USD",
-    threshold: 50
+    threshold: 50,
   });
 
   expectCDK(stack).to(
@@ -337,19 +337,16 @@ test("Support for default time unit", () => {
           Amount: 10,
           Unit: "USD",
         },
-        BudgetType: "COST",        
+        BudgetType: "COST",
         CostFilters: {
           AZ: ["eu-central-1"],
           TagKeyValue: ["user:Application$HelloWorld", "user:Service$Lambda"],
         },
         TimeUnit: "MONTHLY",
-      }    
+      },
     })
   );
 });
-
-
-
 
 test("Support for notification type FORECASTED", () => {
   const stack = new Stack();
@@ -361,11 +358,11 @@ test("Support for notification type FORECASTED", () => {
     limit: 10,
     unit: "USD",
     threshold: 50,
-    notificationType: NotificationType.FORECASTED
+    notificationType: NotificationType.FORECASTED,
   });
 
   expectCDK(stack).to(
-    haveResourceLike("AWS::Budgets::Budget", {      
+    haveResourceLike("AWS::Budgets::Budget", {
       NotificationsWithSubscribers: [
         {
           Notification: {
@@ -373,9 +370,94 @@ test("Support for notification type FORECASTED", () => {
             NotificationType: "FORECASTED",
             Threshold: 50,
             ThresholdType: "PERCENTAGE",
-          }          
+          },
         },
       ],
+    })
+  );
+});
+
+test("Exceeding maximum number of mail recipients gives an error", () => {
+  const stack = new Stack();
+
+  expect(() => {
+    new BudgetNotifier(stack, "notifier", {
+      recipients: [
+        "1john.doe@foo.bar",
+        "2john.doe@foo.bar",
+        "3john.doe@foo.bar",
+        "4john.doe@foo.bar",
+        "5john.doe@foo.bar",
+        "6john.doe@foo.bar",
+        "7john.doe@foo.bar",
+        "8john.doe@foo.bar",
+        "9john.doe@foo.bar",
+        "10john.doe@foo.bar",
+        "11john.doe@foo.bar",
+      ],
+      availabilityZones: ["eu-central-1"],
+      application: "HelloWorld",
+      limit: 10,
+      unit: "USD",
+      threshold: -5,
+    });
+  }).toThrowError(/The maximum number of 10 e-mail recipients is exceeded./);
+});
+
+test("SNS topic is setup", () => {
+  const stack = new Stack();
+
+  new BudgetNotifier(stack, "notifier", {
+    topicArn: "sns-topic",
+    availabilityZones: ["eu-central-1"],
+    costCenter: "myCostCenter",
+    limit: 10,
+    unit: "USD",
+    threshold: 50,
+    notificationType: NotificationType.FORECASTED,
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {
+      NotificationsWithSubscribers: [
+        {
+          Notification: {
+            ComparisonOperator: "GREATER_THAN",
+            NotificationType: NotificationType.FORECASTED,
+            Threshold: 50,
+            ThresholdType: "PERCENTAGE",
+          },
+          Subscribers: [
+            {
+              Address: "sns-topic",
+              SubscriptionType: "SNS",
+            },
+          ],
+        },
+      ],
+    })
+  );
+});
+
+test("TagKeyValue field not added if no application or cost center is given", () => {
+  const stack = new Stack();
+
+  new BudgetNotifier(stack, "notifier", {
+    recipients: ["john.doe@foo.bar"],
+    availabilityZones: ["eu-central-1"],
+    limit: 10,
+    unit: "USD",
+    threshold: 50,
+  });
+
+  expectCDK(stack).to(
+    haveResourceLike("AWS::Budgets::Budget", {
+      Budget: {
+        CostFilters: {
+          AZ: ["eu-central-1"],
+          TagKeyValue: ABSENT,
+        },
+      },
     })
   );
 });

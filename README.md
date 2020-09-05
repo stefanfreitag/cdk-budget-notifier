@@ -1,36 +1,43 @@
 # AWS Budget Notifier
 
-Setup AWS Budget notifications using AWS CDK.
-By default notifications are sent to all subscribers via e-mail.
+Setup a AWS Budget notification using AWS Cloud Development Kit (CDK).
+The construct supports notifying to
 
-## Example usage
+- users via e-mail. Up to 10 e-mail addresses are supported
+- an SNS topic<br>
+  The SNS topic needs to exist and publishing to the topic needs to be allowed.
+
+## Example usage in a CDK Stack
 
 ```javascript
-import * as cdk from "@aws-cdk/core";
+const app = new cdk.App();
+const stack = new Stack(app, "BudgetNotifierStack");
 
-import { CfnBudget } from "@aws-cdk/aws-budgets";
-import { StackProps } from "@aws-cdk/core";
-import { BudgetNotifier } from "./budget_notifier";
+// Define the SNS topic and setup the resource policy
+const topic = new Topic(stack, "topic");
 
-export class BudgetNotifierStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: StackProps) {
-    super(scope, id, props);
+const statement = new PolicyStatement({
+  effect: Effect.ALLOW,
+  principals: [new ServicePrincipal("budgets.amazonaws.com")],
+  actions: ["SNS:Publish"],
+  sid: "Allow budget to publish to SNS"
+});
+topic.addToResourcePolicy(statement);
 
-    new BudgetNotifier(this, "test", {
-      recipients: ["john@doe.com"],
-      availabilityZones: ["eu-central-1", "eu-west-1"],
-      application: "HelloWorld",
-      costCenter: "myCostCenter",
-      limit: 10,
-      unit: "USD",
-      threshold: 75,
-    });
-  }
-}
+// Setup the budget notifier and pass the ARN of the SNS topic
+new BudgetNotifier(stack, "notifier", {
+  topicArn: topic.topicArn,
+  availabilityZones: ["eu-central-1"],
+  costCenter: "myCostCenter",
+  limit: 10,
+  unit: "USD",
+  threshold: 15,
+  notificationType: NotificationType.FORECASTED,
+});
+
 ```
 
 ## Links
 
-- [API documentation](./API.md)
 - [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)
 - [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)
