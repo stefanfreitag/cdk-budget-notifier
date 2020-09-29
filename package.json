@@ -42,7 +42,7 @@
     "@types/node": "14.6.4",
     "aws-cdk": "1.64.1",
     "jest": "26.4.2",
-    "jsii": "1.12.0",
+    "jsii": "1.13.0",
     "jsii-diff": "1.12.0",
     "jsii-docgen": "1.4.42",
     "jsii-pacmak": "1.12.0",
