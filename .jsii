@@ -7,11 +7,11 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.62.0",
-    "@aws-cdk/aws-iam": "^1.62.0",
-    "@aws-cdk/aws-sns": "^1.62.0",
-    "@aws-cdk/core": "1.62.0",
-    "constructs": "^3.0.4"
+    "@aws-cdk/aws-budgets": "1.67.0",
+    "@aws-cdk/aws-iam": "^1.67.0",
+    "@aws-cdk/aws-sns": "^1.67.0",
+    "@aws-cdk/core": "1.67.0",
+    "constructs": "3.0.4"
   },
   "dependencyClosure": {
     "@aws-cdk/aws-budgets": {
@@ -34,6 +34,10 @@
           "npm": "@aws-cdk/aws-budgets"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.aws-budgets",
           "module": "aws_cdk.aws_budgets"
         }
@@ -59,6 +63,10 @@
           "npm": "@aws-cdk/aws-cloudwatch"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.aws-cloudwatch",
           "module": "aws_cdk.aws_cloudwatch"
         }
@@ -84,6 +92,10 @@
           "npm": "@aws-cdk/aws-events"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.aws-events",
           "module": "aws_cdk.aws_events"
         }
@@ -109,6 +121,10 @@
           "npm": "@aws-cdk/aws-iam"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.aws-iam",
           "module": "aws_cdk.aws_iam"
         }
@@ -134,6 +150,10 @@
           "npm": "@aws-cdk/aws-kms"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.aws-kms",
           "module": "aws_cdk.aws_kms"
         }
@@ -159,6 +179,10 @@
           "npm": "@aws-cdk/aws-sns"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.aws-sns",
           "module": "aws_cdk.aws_sns"
         }
@@ -184,6 +208,10 @@
           "npm": "@aws-cdk/aws-sqs"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.aws-sqs",
           "module": "aws_cdk.aws_sqs"
         }
@@ -209,6 +237,10 @@
           "npm": "@aws-cdk/cloud-assembly-schema"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.cloud-assembly-schema",
           "module": "aws_cdk.cloud_assembly_schema"
         }
@@ -234,6 +266,10 @@
           "npm": "@aws-cdk/core"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.core",
           "module": "aws_cdk.core"
         }
@@ -259,6 +295,10 @@
           "npm": "@aws-cdk/cx-api"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.cx-api",
           "module": "aws_cdk.cx_api"
         }
@@ -284,6 +324,10 @@
           "npm": "@aws-cdk/region-info"
         },
         "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
           "distName": "aws-cdk.region-info",
           "module": "aws_cdk.region_info"
         }
@@ -317,7 +361,7 @@
     "stability": "experimental"
   },
   "homepage": "https://github.com/stefanfreitag/cdk-budget-notifier.git",
-  "jsiiVersion": "1.12.0 (build 5ddc9f2)",
+  "jsiiVersion": "1.13.0 (build 385c325)",
   "keywords": [
     "aws",
     "cdk",
@@ -671,6 +715,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.2.3",
-  "fingerprint": "8LaGgb7i+mNVXgLI7eLMfphwC5x07MRQNVaZwVHPbEw="
+  "version": "0.3.0",
+  "fingerprint": "ABtvj84LH/Iz46+1BF5kP3wJnYrQxK4FouNfvdRF+6A="
 }
