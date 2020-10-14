@@ -1,6 +1,7 @@
 {
   "extends": ["config:base"],
   "enabledManagers": ["npm"],
+  "ignoreDeps": ["constructs"],
   "packageRules": [
     {
       "packageNames": ["aws-cdk"],
