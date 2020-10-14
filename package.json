@@ -1,6 +1,6 @@
 {
   "name": "@stefanfreitag/aws-budget-notifier",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "src/index.ts",
   "types": "src/index.d.ts",
   "bin": {
