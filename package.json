@@ -43,7 +43,7 @@
     "aws-cdk": "1.70.0",
     "jest": "26.5.3",
     "jsii": "1.13.0",
-    "jsii-diff": "1.13.0",
+    "jsii-diff": "1.14.0",
     "jsii-docgen": "1.4.72",
     "jsii-pacmak": "1.14.0",
     "jsii-release": "0.2.3",
