@@ -1,9 +1,8 @@
-import * as cdk from "@aws-cdk/core";
+import { CfnBudget } from '@aws-cdk/aws-budgets';
 
-import { CfnBudget } from "@aws-cdk/aws-budgets";
-import { Construct } from "@aws-cdk/core";
-import { NotificationType } from "./NotificationType";
-import { TimeUnit } from "./TimeUnit";
+import { Construct } from '@aws-cdk/core';
+import { NotificationType } from './NotificationType';
+import { TimeUnit } from './TimeUnit';
 
 /**
  * Configuration options of the {@link BudgetNotifier | BudgetNotifier}.
@@ -62,7 +61,7 @@ export interface BudgetNotifierProps {
 }
 
 export class BudgetNotifier extends Construct {
-  constructor(scope: cdk.Construct, id: string, props: BudgetNotifierProps) {
+  constructor(scope: Construct, id: string, props: BudgetNotifierProps) {
     super(scope, id);
 
     this.validateProperties(props);
@@ -70,9 +69,9 @@ export class BudgetNotifier extends Construct {
     const costFilters = this.createCostFilters(props);
     const subscribers = this.createSubscribers(props);
 
-    new CfnBudget(this, "MonthlyBudget_" + id, {
+    new CfnBudget(this, 'MonthlyBudget_' + id, {
       budget: {
-        budgetType: "COST",
+        budgetType: 'COST',
         timeUnit: props.timeUnit ? props.timeUnit : TimeUnit.MONTHLY,
         budgetLimit: {
           amount: props.limit,
@@ -84,9 +83,9 @@ export class BudgetNotifier extends Construct {
       notificationsWithSubscribers: [
         {
           notification: {
-            comparisonOperator: "GREATER_THAN",
+            comparisonOperator: 'GREATER_THAN',
             threshold: props.threshold,
-            thresholdType: "PERCENTAGE",
+            thresholdType: 'PERCENTAGE',
             notificationType: props.notificationType
               ? props.notificationType
               : NotificationType.ACTUAL,
@@ -100,12 +99,12 @@ export class BudgetNotifier extends Construct {
   private validateProperties(props: BudgetNotifierProps): void {
     if (props.recipients && props.recipients.length > 10) {
       throw new Error(
-        "The maximum number of 10 e-mail recipients is exceeded."
+        'The maximum number of 10 e-mail recipients is exceeded.',
       );
     }
 
     if (props.threshold <= 0) {
-      throw new Error("Thresholds less than or equal to 0 are not allowed.");
+      throw new Error('Thresholds less than or equal to 0 are not allowed.');
     }
   }
 
@@ -115,14 +114,14 @@ export class BudgetNotifier extends Construct {
       for (const recipient of props.recipients) {
         subscribers.push({
           address: recipient,
-          subscriptionType: "EMAIL",
+          subscriptionType: 'EMAIL',
         });
       }
     }
     if (props.topicArn) {
       subscribers.push({
         address: props.topicArn,
-        subscriptionType: "SNS",
+        subscriptionType: 'SNS',
       });
     }
 
@@ -132,28 +131,28 @@ export class BudgetNotifier extends Construct {
   private createCostFilters(props: BudgetNotifierProps) {
     const tags: Array<string> = [];
     if (props.application) {
-      tags.push("user:Application$" + props.application);
+      tags.push('user:Application$' + props.application);
     }
 
     if (props.costCenter) {
-      tags.push("user:Cost Center$" + props.costCenter);
+      tags.push('user:Cost Center$' + props.costCenter);
     }
 
     if (props.service) {
-      tags.push("user:Service$" + props.service);
+      tags.push('user:Service$' + props.service);
     }
 
     const costFilters: any = {};
 
     if (tags && tags.length>0) {
-      costFilters["TagKeyValue"] = tags;
+      costFilters.TagKeyValue = tags;
     }
     const availabilityZones: Array<string> = [];
     if (props.availabilityZones) {
       for (const az of props.availabilityZones) {
         availabilityZones.push(az);
       }
-      costFilters["AZ"] = availabilityZones;
+      costFilters.AZ = availabilityZones;
     }
     return costFilters;
   }

@@ -1,17 +1,17 @@
 {
   "author": {
-    "email": "stefan@stefreitag.de",
+    "email": "stefan.freitag@udo.edu",
     "name": "Stefan Freitag",
     "roles": [
       "author"
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.67.0",
-    "@aws-cdk/aws-iam": "^1.67.0",
-    "@aws-cdk/aws-sns": "^1.67.0",
-    "@aws-cdk/core": "1.67.0",
-    "constructs": "3.0.4"
+    "@aws-cdk/aws-budgets": "^1.73.0",
+    "@aws-cdk/aws-iam": "^1.73.0",
+    "@aws-cdk/aws-sns": "^1.73.0",
+    "@aws-cdk/core": "^1.73.0",
+    "constructs": "^3.2.0"
   },
   "dependencyClosure": {
     "@aws-cdk/aws-budgets": {
@@ -356,62 +356,54 @@
       }
     }
   },
-  "description": "@stefanfreitag/aws-budget-notifier",
+  "description": "A simple AWS budget notifier.",
   "docs": {
-    "stability": "experimental"
+    "stability": "stable"
   },
-  "homepage": "https://github.com/stefanfreitag/cdk-budget-notifier.git",
-  "jsiiVersion": "1.13.0 (build 385c325)",
+  "homepage": "https://github.com/stefan.freitag/projen-budget-notifier.git",
+  "jsiiVersion": "1.14.1 (build 828de8a)",
   "keywords": [
     "aws",
-    "cdk",
-    "budget"
+    "budget",
+    "cdk"
   ],
   "license": "Apache-2.0",
-  "name": "@stefanfreitag/aws-budget-notifier",
+  "metadata": {
+    "jsii": {
+      "pacmak": {
+        "hasDefaultInterfaces": true
+      }
+    }
+  },
+  "name": "Aws_Budget_Notifier",
   "readme": {
     "markdown": "# AWS Budget Notifier\n\nSetup a AWS Budget notification using AWS Cloud Development Kit (CDK).\nThe construct supports notifying to\n\n- users via e-mail. Up to 10 e-mail addresses are supported\n- an SNS topic<br>\n  The SNS topic needs to exist and publishing to the topic needs to be allowed.\n\n## Example usage in a CDK Stack\n\n```javascript\nconst app = new cdk.App();\nconst stack = new Stack(app, \"BudgetNotifierStack\");\n\n// Define the SNS topic and setup the resource policy\nconst topic = new Topic(stack, \"topic\");\n\nconst statement = new PolicyStatement({\n  effect: Effect.ALLOW,\n  principals: [new ServicePrincipal(\"budgets.amazonaws.com\")],\n  actions: [\"SNS:Publish\"],\n  sid: \"Allow budget to publish to SNS\"\n});\ntopic.addToResourcePolicy(statement);\n\n// Setup the budget notifier and pass the ARN of the SNS topic\nnew BudgetNotifier(stack, \"notifier\", {\n  topicArn: topic.topicArn,\n  availabilityZones: [\"eu-central-1\"],\n  costCenter: \"myCostCenter\",\n  limit: 10,\n  unit: \"USD\",\n  threshold: 15,\n  notificationType: NotificationType.FORECASTED,\n});\n\n```\n\n## Links\n\n- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)\n- [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stefanfreitag/cdk-budget-notifier.git"
+    "url": "https://github.com/stefan.freitag/projen-budget-notifier.git"
   },
   "schema": "jsii/0.10.0",
   "targets": {
-    "dotnet": {
-      "namespace": "De.Freitag.Stefan.Aws.Cdk",
-      "packageId": "CdkBudgetNotifier"
-    },
-    "java": {
-      "maven": {
-        "artifactId": "cdkBudgetNotifier",
-        "groupId": "io.github.stefanfreitag"
-      },
-      "package": "io.github.stefanfreitag.cdk.budgetnotifier"
-    },
     "js": {
-      "npm": "@stefanfreitag/aws-budget-notifier"
-    },
-    "python": {
-      "distName": "cdk-budget-notifier",
-      "module": "cdk_budget_notifier"
+      "npm": "Aws_Budget_Notifier"
     }
   },
   "types": {
-    "@stefanfreitag/aws-budget-notifier.BudgetNotifier": {
-      "assembly": "@stefanfreitag/aws-budget-notifier",
+    "Aws_Budget_Notifier.BudgetNotifier": {
+      "assembly": "Aws_Budget_Notifier",
       "base": "@aws-cdk/core.Construct",
       "docs": {
-        "stability": "experimental"
+        "stability": "stable"
       },
-      "fqn": "@stefanfreitag/aws-budget-notifier.BudgetNotifier",
+      "fqn": "Aws_Budget_Notifier.BudgetNotifier",
       "initializer": {
         "docs": {
-          "stability": "experimental"
+          "stability": "stable"
         },
         "locationInModule": {
           "filename": "src/budget_notifier.ts",
-          "line": 65
+          "line": 64
         },
         "parameters": [
           {
@@ -429,7 +421,7 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@stefanfreitag/aws-budget-notifier.BudgetNotifierProps"
+              "fqn": "Aws_Budget_Notifier.BudgetNotifierProps"
             }
           }
         ]
@@ -437,35 +429,35 @@
       "kind": "class",
       "locationInModule": {
         "filename": "src/budget_notifier.ts",
-        "line": 64
+        "line": 63
       },
       "name": "BudgetNotifier"
     },
-    "@stefanfreitag/aws-budget-notifier.BudgetNotifierProps": {
-      "assembly": "@stefanfreitag/aws-budget-notifier",
+    "Aws_Budget_Notifier.BudgetNotifierProps": {
+      "assembly": "Aws_Budget_Notifier",
       "datatype": true,
       "docs": {
-        "stability": "experimental",
+        "stability": "stable",
         "summary": "Configuration options of the {@link BudgetNotifier | BudgetNotifier}."
       },
-      "fqn": "@stefanfreitag/aws-budget-notifier.BudgetNotifierProps",
+      "fqn": "Aws_Budget_Notifier.BudgetNotifierProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/budget_notifier.ts",
-        "line": 11
+        "line": 10
       },
       "name": "BudgetNotifierProps",
       "properties": [
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "The cost associated with the budget threshold."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 52
+            "line": 51
           },
           "name": "limit",
           "type": {
@@ -475,13 +467,13 @@
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "The threshold value in percent (0-100)."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 43
+            "line": 42
           },
           "name": "threshold",
           "type": {
@@ -491,13 +483,13 @@
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "The unit of measurement that is used for the budget threshold, such as dollars or GB."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 56
+            "line": 55
           },
           "name": "unit",
           "type": {
@@ -507,13 +499,13 @@
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "If specified the application name will be added as tag filter."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 30
+            "line": 29
           },
           "name": "application",
           "optional": true,
@@ -524,13 +516,13 @@
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "If specified the availability zones will be added as tag filter."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 26
+            "line": 25
           },
           "name": "availabilityZones",
           "optional": true,
@@ -546,13 +538,13 @@
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "If specified the cost center will be added as tag filter."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 34
+            "line": 33
           },
           "name": "costCenter",
           "optional": true,
@@ -564,31 +556,31 @@
           "abstract": true,
           "docs": {
             "see": "http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notification.html#cfn-budgets-budget-notification-notificationtype",
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "Whether the notification is for how much you have spent (ACTUAL) or for how much you're forecasted to spend (FORECASTED)."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 61
+            "line": 60
           },
           "name": "notificationType",
           "optional": true,
           "type": {
-            "fqn": "@stefanfreitag/aws-budget-notifier.NotificationType"
+            "fqn": "Aws_Budget_Notifier.NotificationType"
           }
         },
         {
           "abstract": true,
           "docs": {
             "remarks": "A maximum of 10 recipients is allowed.",
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "Budget notifications will be sent to each of the recipients (e-mail addresses)."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 16
+            "line": 15
           },
           "name": "recipients",
           "optional": true,
@@ -604,13 +596,13 @@
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "If specified the service will be added as tag filter."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 39
+            "line": 38
           },
           "name": "service",
           "optional": true,
@@ -622,29 +614,29 @@
           "abstract": true,
           "docs": {
             "see": "http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-budgetdata.html#cfn-budgets-budget-budgetdata-timeunit",
-            "stability": "experimental",
+            "stability": "stable",
             "summary": "The length of time until a budget resets the actual and forecasted spend."
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 48
+            "line": 47
           },
           "name": "timeUnit",
           "optional": true,
           "type": {
-            "fqn": "@stefanfreitag/aws-budget-notifier.TimeUnit"
+            "fqn": "Aws_Budget_Notifier.TimeUnit"
           }
         },
         {
           "abstract": true,
           "docs": {
-            "stability": "experimental"
+            "stability": "stable"
           },
           "immutable": true,
           "locationInModule": {
             "filename": "src/budget_notifier.ts",
-            "line": 22
+            "line": 21
           },
           "name": "topicArn",
           "optional": true,
@@ -654,12 +646,12 @@
         }
       ]
     },
-    "@stefanfreitag/aws-budget-notifier.NotificationType": {
-      "assembly": "@stefanfreitag/aws-budget-notifier",
+    "Aws_Budget_Notifier.NotificationType": {
+      "assembly": "Aws_Budget_Notifier",
       "docs": {
-        "stability": "experimental"
+        "stability": "stable"
       },
-      "fqn": "@stefanfreitag/aws-budget-notifier.NotificationType",
+      "fqn": "Aws_Budget_Notifier.NotificationType",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/NotificationType.ts",
@@ -668,25 +660,25 @@
       "members": [
         {
           "docs": {
-            "stability": "experimental"
+            "stability": "stable"
           },
           "name": "ACTUAL"
         },
         {
           "docs": {
-            "stability": "experimental"
+            "stability": "stable"
           },
           "name": "FORECASTED"
         }
       ],
       "name": "NotificationType"
     },
-    "@stefanfreitag/aws-budget-notifier.TimeUnit": {
-      "assembly": "@stefanfreitag/aws-budget-notifier",
+    "Aws_Budget_Notifier.TimeUnit": {
+      "assembly": "Aws_Budget_Notifier",
       "docs": {
-        "stability": "experimental"
+        "stability": "stable"
       },
-      "fqn": "@stefanfreitag/aws-budget-notifier.TimeUnit",
+      "fqn": "Aws_Budget_Notifier.TimeUnit",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/TimeUnit.ts",
@@ -695,19 +687,19 @@
       "members": [
         {
           "docs": {
-            "stability": "experimental"
+            "stability": "stable"
           },
           "name": "MONTHLY"
         },
         {
           "docs": {
-            "stability": "experimental"
+            "stability": "stable"
           },
           "name": "QUARTERLY"
         },
         {
           "docs": {
-            "stability": "experimental"
+            "stability": "stable"
           },
           "name": "ANNUALLY"
         }
@@ -715,6 +707,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.3.0",
-  "fingerprint": "ABtvj84LH/Iz46+1BF5kP3wJnYrQxK4FouNfvdRF+6A="
+  "version": "0.0.0",
+  "fingerprint": "99CkGrC43Frct397jfJzCcGtrOzVmjq87aLElbQtUAo="
 }
