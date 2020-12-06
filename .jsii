@@ -7,10 +7,10 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.73.0",
-    "@aws-cdk/aws-iam": "^1.73.0",
-    "@aws-cdk/aws-sns": "^1.73.0",
-    "@aws-cdk/core": "^1.73.0",
+    "@aws-cdk/aws-budgets": "^1.76.0",
+    "@aws-cdk/aws-iam": "^1.76.0",
+    "@aws-cdk/aws-sns": "^1.76.0",
+    "@aws-cdk/core": "^1.76.0",
     "constructs": "^3.2.0"
   },
   "dependencyClosure": {
@@ -375,7 +375,7 @@
       }
     }
   },
-  "name": "Aws_Budget_Notifier",
+  "name": "aws_budget_notifier",
   "readme": {
     "markdown": "# AWS Budget Notifier\n\nSetup a AWS Budget notification using AWS Cloud Development Kit (CDK).\nThe construct supports notifying to\n\n- users via e-mail. Up to 10 e-mail addresses are supported\n- an SNS topic<br>\n  The SNS topic needs to exist and publishing to the topic needs to be allowed.\n\n## Example usage in a CDK Stack\n\n```javascript\nconst app = new cdk.App();\nconst stack = new Stack(app, \"BudgetNotifierStack\");\n\n// Define the SNS topic and setup the resource policy\nconst topic = new Topic(stack, \"topic\");\n\nconst statement = new PolicyStatement({\n  effect: Effect.ALLOW,\n  principals: [new ServicePrincipal(\"budgets.amazonaws.com\")],\n  actions: [\"SNS:Publish\"],\n  sid: \"Allow budget to publish to SNS\"\n});\ntopic.addToResourcePolicy(statement);\n\n// Setup the budget notifier and pass the ARN of the SNS topic\nnew BudgetNotifier(stack, \"notifier\", {\n  topicArn: topic.topicArn,\n  availabilityZones: [\"eu-central-1\"],\n  costCenter: \"myCostCenter\",\n  limit: 10,\n  unit: \"USD\",\n  threshold: 15,\n  notificationType: NotificationType.FORECASTED,\n});\n\n```\n\n## Links\n\n- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)\n- [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)"
   },
@@ -385,18 +385,29 @@
   },
   "schema": "jsii/0.10.0",
   "targets": {
+    "java": {
+      "maven": {
+        "artifactId": "cdkBudgetNotifier",
+        "groupId": "io.github.stefanfreitag"
+      },
+      "package": "io.github.stefanfreitag.cdk.budgetnotifier"
+    },
     "js": {
-      "npm": "Aws_Budget_Notifier"
+      "npm": "aws_budget_notifier"
+    },
+    "python": {
+      "distName": "cdk-budget-notifier",
+      "module": "cdk_budget_notifier"
     }
   },
   "types": {
-    "Aws_Budget_Notifier.BudgetNotifier": {
-      "assembly": "Aws_Budget_Notifier",
+    "aws_budget_notifier.BudgetNotifier": {
+      "assembly": "aws_budget_notifier",
       "base": "@aws-cdk/core.Construct",
       "docs": {
         "stability": "stable"
       },
-      "fqn": "Aws_Budget_Notifier.BudgetNotifier",
+      "fqn": "aws_budget_notifier.BudgetNotifier",
       "initializer": {
         "docs": {
           "stability": "stable"
@@ -421,7 +432,7 @@
           {
             "name": "props",
             "type": {
-              "fqn": "Aws_Budget_Notifier.BudgetNotifierProps"
+              "fqn": "aws_budget_notifier.BudgetNotifierProps"
             }
           }
         ]
@@ -433,14 +444,14 @@
       },
       "name": "BudgetNotifier"
     },
-    "Aws_Budget_Notifier.BudgetNotifierProps": {
-      "assembly": "Aws_Budget_Notifier",
+    "aws_budget_notifier.BudgetNotifierProps": {
+      "assembly": "aws_budget_notifier",
       "datatype": true,
       "docs": {
         "stability": "stable",
         "summary": "Configuration options of the {@link BudgetNotifier | BudgetNotifier}."
       },
-      "fqn": "Aws_Budget_Notifier.BudgetNotifierProps",
+      "fqn": "aws_budget_notifier.BudgetNotifierProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/budget_notifier.ts",
@@ -567,7 +578,7 @@
           "name": "notificationType",
           "optional": true,
           "type": {
-            "fqn": "Aws_Budget_Notifier.NotificationType"
+            "fqn": "aws_budget_notifier.NotificationType"
           }
         },
         {
@@ -625,7 +636,7 @@
           "name": "timeUnit",
           "optional": true,
           "type": {
-            "fqn": "Aws_Budget_Notifier.TimeUnit"
+            "fqn": "aws_budget_notifier.TimeUnit"
           }
         },
         {
@@ -646,12 +657,12 @@
         }
       ]
     },
-    "Aws_Budget_Notifier.NotificationType": {
-      "assembly": "Aws_Budget_Notifier",
+    "aws_budget_notifier.NotificationType": {
+      "assembly": "aws_budget_notifier",
       "docs": {
         "stability": "stable"
       },
-      "fqn": "Aws_Budget_Notifier.NotificationType",
+      "fqn": "aws_budget_notifier.NotificationType",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/NotificationType.ts",
@@ -673,12 +684,12 @@
       ],
       "name": "NotificationType"
     },
-    "Aws_Budget_Notifier.TimeUnit": {
-      "assembly": "Aws_Budget_Notifier",
+    "aws_budget_notifier.TimeUnit": {
+      "assembly": "aws_budget_notifier",
       "docs": {
         "stability": "stable"
       },
-      "fqn": "Aws_Budget_Notifier.TimeUnit",
+      "fqn": "aws_budget_notifier.TimeUnit",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/TimeUnit.ts",
@@ -708,5 +719,5 @@
     }
   },
   "version": "0.0.0",
-  "fingerprint": "99CkGrC43Frct397jfJzCcGtrOzVmjq87aLElbQtUAo="
+  "fingerprint": "gh93acOfVZ4F8URrIY4cREZiAq381DFR/y6LS0QfXeY="
 }
