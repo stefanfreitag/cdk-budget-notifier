@@ -13,6 +13,7 @@ const project = new AwsCdkConstructLibrary({
   },
   codeCov: true,
   dependabot: false,
+  antitamper: false,
   keywords: [
     "aws",
     "cdk",
