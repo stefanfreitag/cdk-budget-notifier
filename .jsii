@@ -11,7 +11,7 @@
     "@aws-cdk/aws-iam": "^1.76.0",
     "@aws-cdk/aws-sns": "^1.76.0",
     "@aws-cdk/core": "^1.76.0",
-    "constructs": "^3.2.0"
+    "constructs": "^3.2.27"
   },
   "dependencyClosure": {
     "@aws-cdk/aws-budgets": {
@@ -718,6 +718,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.0.0",
-  "fingerprint": "gh93acOfVZ4F8URrIY4cREZiAq381DFR/y6LS0QfXeY="
+  "version": "0.0.1",
+  "fingerprint": "cV+mNlUr99roPDLLsus+LOFLDx6LDNFrISc/7H4J6cc="
 }
