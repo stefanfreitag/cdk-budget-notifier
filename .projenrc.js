@@ -46,7 +46,7 @@ const workflow = project.github.addWorkflow('ProjenYarnUpgrade');
 
 workflow.on({
   schedule: [{
-    cron: '11 0 */5 * *',
+    cron: '11 0 1 * *',
   }],
   workflow_dispatch: {}, // allow manual triggering
 });
