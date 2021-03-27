@@ -33,7 +33,6 @@ yarn-error.log*
 !/.github/pull_request_template.md
 !/.github/workflows/build.yml
 !/.github/workflows/projenyarnupgrade.yml
-!/.github/workflows/rebuild-bot.yml
 !/.github/workflows/release.yml
 !/.mergify.yml
 !/.npmignore
@@ -46,5 +45,6 @@ yarn-error.log*
 !/package.json
 !/src
 !/test
+!/tsconfig.eslint.json
 !/tsconfig.jest.json
 !version.json

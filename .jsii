@@ -7,21 +7,19 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.83.0",
-    "@aws-cdk/aws-iam": "^1.83.0",
-    "@aws-cdk/aws-sns": "^1.83.0",
-    "@aws-cdk/core": "^1.83.0",
+    "@aws-cdk/aws-budgets": "^1.95.1",
+    "@aws-cdk/aws-iam": "^1.95.1",
+    "@aws-cdk/aws-sns": "^1.95.1",
+    "@aws-cdk/core": "^1.95.1",
     "constructs": "^3.2.27"
   },
   "dependencyClosure": {
     "@aws-cdk/aws-budgets": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.AWS.Budgets",
-          "packageId": "Amazon.CDK.AWS.Budgets",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.AWS.Budgets"
         },
         "java": {
           "maven": {
@@ -46,11 +44,9 @@
     "@aws-cdk/aws-cloudwatch": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.AWS.CloudWatch",
-          "packageId": "Amazon.CDK.AWS.CloudWatch",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.AWS.CloudWatch"
         },
         "java": {
           "maven": {
@@ -75,11 +71,9 @@
     "@aws-cdk/aws-events": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.AWS.Events",
-          "packageId": "Amazon.CDK.AWS.Events",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.AWS.Events"
         },
         "java": {
           "maven": {
@@ -104,11 +98,9 @@
     "@aws-cdk/aws-iam": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.AWS.IAM",
-          "packageId": "Amazon.CDK.AWS.IAM",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.AWS.IAM"
         },
         "java": {
           "maven": {
@@ -133,11 +125,9 @@
     "@aws-cdk/aws-kms": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.AWS.KMS",
-          "packageId": "Amazon.CDK.AWS.KMS",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.AWS.KMS"
         },
         "java": {
           "maven": {
@@ -162,11 +152,9 @@
     "@aws-cdk/aws-sns": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.AWS.SNS",
-          "packageId": "Amazon.CDK.AWS.SNS",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.AWS.SNS"
         },
         "java": {
           "maven": {
@@ -191,11 +179,9 @@
     "@aws-cdk/aws-sqs": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.AWS.SQS",
-          "packageId": "Amazon.CDK.AWS.SQS",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.AWS.SQS"
         },
         "java": {
           "maven": {
@@ -220,11 +206,9 @@
     "@aws-cdk/cloud-assembly-schema": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.CloudAssembly.Schema",
-          "packageId": "Amazon.CDK.CloudAssembly.Schema",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.CloudAssembly.Schema"
         },
         "java": {
           "maven": {
@@ -249,11 +233,9 @@
     "@aws-cdk/core": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK",
-          "packageId": "Amazon.CDK",
-          "signAssembly": true
+          "packageId": "Amazon.CDK"
         },
         "java": {
           "maven": {
@@ -278,11 +260,9 @@
     "@aws-cdk/cx-api": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.CXAPI",
-          "packageId": "Amazon.CDK.CXAPI",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.CXAPI"
         },
         "java": {
           "maven": {
@@ -307,11 +287,9 @@
     "@aws-cdk/region-info": {
       "targets": {
         "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
           "namespace": "Amazon.CDK.RegionInfo",
-          "packageId": "Amazon.CDK.RegionInfo",
-          "signAssembly": true
+          "packageId": "Amazon.CDK.RegionInfo"
         },
         "java": {
           "maven": {
@@ -338,6 +316,9 @@
         "dotnet": {
           "namespace": "Constructs",
           "packageId": "Constructs"
+        },
+        "go": {
+          "moduleName": "github.com/aws/constructs-go"
         },
         "java": {
           "maven": {
@@ -718,6 +699,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.0.2",
-  "fingerprint": "NaBKHoQLOdqTHJRsTj8acDMG1leLktjQ/eOQ1UkxMNQ="
+  "version": "0.0.3",
+  "fingerprint": "KOE7odwWpBDdPqwNbm25wDJoyjP2Y7+qst6tvme/96c="
 }
