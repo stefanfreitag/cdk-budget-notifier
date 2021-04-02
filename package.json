@@ -30,7 +30,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.95.1",
+    "@aws-cdk/assert": "^1.96.0",
     "@types/jest": "^26.0.7",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
@@ -52,17 +52,17 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-budgets": "^1.95.1",
-    "@aws-cdk/aws-iam": "^1.95.1",
-    "@aws-cdk/aws-sns": "^1.95.1",
-    "@aws-cdk/core": "^1.95.1",
+    "@aws-cdk/aws-budgets": "^1.96.0",
+    "@aws-cdk/aws-iam": "^1.96.0",
+    "@aws-cdk/aws-sns": "^1.96.0",
+    "@aws-cdk/core": "^1.96.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.95.1",
-    "@aws-cdk/aws-iam": "^1.95.1",
-    "@aws-cdk/aws-sns": "^1.95.1",
-    "@aws-cdk/core": "^1.95.1"
+    "@aws-cdk/aws-budgets": "^1.96.0",
+    "@aws-cdk/aws-iam": "^1.96.0",
+    "@aws-cdk/aws-sns": "^1.96.0",
+    "@aws-cdk/core": "^1.96.0"
   },
   "bundledDependencies": [],
   "keywords": [
@@ -72,7 +72,7 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.0.4",
+  "version": "0.3.2",
   "jest": {
     "testMatch": [
       "**/__tests__/**/*.ts?(x)",

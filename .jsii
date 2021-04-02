@@ -7,10 +7,10 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.95.1",
-    "@aws-cdk/aws-iam": "^1.95.1",
-    "@aws-cdk/aws-sns": "^1.95.1",
-    "@aws-cdk/core": "^1.95.1",
+    "@aws-cdk/aws-budgets": "^1.96.0",
+    "@aws-cdk/aws-iam": "^1.96.0",
+    "@aws-cdk/aws-sns": "^1.96.0",
+    "@aws-cdk/core": "^1.96.0",
     "constructs": "^3.2.27"
   },
   "dependencyClosure": {
@@ -699,6 +699,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.0.3",
-  "fingerprint": "KOE7odwWpBDdPqwNbm25wDJoyjP2Y7+qst6tvme/96c="
+  "version": "0.3.2",
+  "fingerprint": "aaljqF8iVlr9b6919eiciwttfyop3saHHFUxJJjf2FM="
 }

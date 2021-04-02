@@ -2,7 +2,7 @@
   "dependencies": [
     {
       "name": "@aws-cdk/assert",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "build"
     },
     {
@@ -87,22 +87,22 @@
     },
     {
       "name": "@aws-cdk/aws-budgets",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-iam",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-sns",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "peer"
     },
     {
@@ -112,22 +112,22 @@
     },
     {
       "name": "@aws-cdk/aws-budgets",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-iam",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-sns",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.95.1",
+      "version": "^1.96.0",
       "type": "runtime"
     }
   ],
