@@ -1,10 +1,26 @@
 {
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "contributorsPerLine": 5,
   "contributorsSortAlphabetically": false,
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
   "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
-  "skipCi": "true",
-  "contributors": []
+  "skipCi": true,
+  "contributors": [
+    {
+      "login": "dedominicisfa",
+      "name": "dedominicisfa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23100791?v=4",
+      "profile": "https://github.com/dedominicisfa",
+      "contributions": [
+        "bug"
+      ]
+    }
+  ],
+  "projectName": "cdk-budget-notifier",
+  "projectOwner": "stefanfreitag",
+  "repoType": "github",
+  "repoHost": "https://github.com"
 }
