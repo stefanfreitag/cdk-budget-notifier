@@ -37,6 +37,11 @@ new BudgetNotifier(stack, "notifier", {
 
 ```
 
+## Contributions
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## Links
 
 - [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)
