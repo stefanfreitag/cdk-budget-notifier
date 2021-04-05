@@ -17,6 +17,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "pgollucci",
+      "name": "Philip M. Gollucci",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34295?v=4",
+      "profile": "http://p6m7g8.github.io",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "projectName": "cdk-budget-notifier",
