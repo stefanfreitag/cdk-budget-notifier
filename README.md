@@ -1,4 +1,4 @@
-# AWS Budget Notifier
+# AWS Budget Notifier 
 
 Setup a AWS Budget notification using AWS Cloud Development Kit (CDK).
 The construct supports notifying to
