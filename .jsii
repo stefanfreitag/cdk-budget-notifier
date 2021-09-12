@@ -7,10 +7,10 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.96.0",
-    "@aws-cdk/aws-iam": "^1.96.0",
-    "@aws-cdk/aws-sns": "^1.96.0",
-    "@aws-cdk/core": "^1.96.0",
+    "@aws-cdk/aws-budgets": "^1.122.0",
+    "@aws-cdk/aws-iam": "^1.122.0",
+    "@aws-cdk/aws-sns": "^1.122.0",
+    "@aws-cdk/core": "^1.122.0",
     "constructs": "^3.2.27"
   },
   "dependencyClosure": {
@@ -65,6 +65,33 @@
           ],
           "distName": "aws-cdk.aws-cloudwatch",
           "module": "aws_cdk.aws_cloudwatch"
+        }
+      }
+    },
+    "@aws-cdk/aws-codestarnotifications": {
+      "targets": {
+        "dotnet": {
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.CodeStarNotifications",
+          "packageId": "Amazon.CDK.AWS.CodeStarNotifications"
+        },
+        "java": {
+          "maven": {
+            "artifactId": "codestarnotifications",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.codestarnotifications"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-codestarnotifications"
+        },
+        "python": {
+          "classifiers": [
+            "Framework :: AWS CDK",
+            "Framework :: AWS CDK :: 1"
+          ],
+          "distName": "aws-cdk.aws-codestarnotifications",
+          "module": "aws_cdk.aws_codestarnotifications"
         }
       }
     },
@@ -358,7 +385,7 @@
   },
   "name": "aws_budget_notifier",
   "readme": {
-    "markdown": "# AWS Budget Notifier\n\nSetup a AWS Budget notification using AWS Cloud Development Kit (CDK).\nThe construct supports notifying to\n\n- users via e-mail. Up to 10 e-mail addresses are supported\n- an SNS topic<br>\n  The SNS topic needs to exist and publishing to the topic needs to be allowed.\n\n## Example usage in a CDK Stack\n\n```javascript\nconst app = new cdk.App();\nconst stack = new Stack(app, \"BudgetNotifierStack\");\n\n// Define the SNS topic and setup the resource policy\nconst topic = new Topic(stack, \"topic\");\n\nconst statement = new PolicyStatement({\n  effect: Effect.ALLOW,\n  principals: [new ServicePrincipal(\"budgets.amazonaws.com\")],\n  actions: [\"SNS:Publish\"],\n  sid: \"Allow budget to publish to SNS\"\n});\ntopic.addToResourcePolicy(statement);\n\n// Setup the budget notifier and pass the ARN of the SNS topic\nnew BudgetNotifier(stack, \"notifier\", {\n  topicArn: topic.topicArn,\n  availabilityZones: [\"eu-central-1\"],\n  costCenter: \"myCostCenter\",\n  limit: 10,\n  unit: \"USD\",\n  threshold: 15,\n  notificationType: NotificationType.FORECASTED,\n});\n\n```\n\n## Links\n\n- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)\n- [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)"
+    "markdown": "# AWS Budget Notifier\n\nSetup a AWS Budget notification using AWS Cloud Development Kit (CDK).\nThe construct supports notifying to\n\n- users via e-mail. Up to 10 e-mail addresses are supported\n- an SNS topic<br>\n  The SNS topic needs to exist and publishing to the topic needs to be allowed.\n\n## Example usage in a CDK Stack\n\n```javascript\nconst app = new cdk.App();\nconst stack = new Stack(app, \"BudgetNotifierStack\");\n\n// Define the SNS topic and setup the resource policy\nconst topic = new Topic(stack, \"topic\");\n\nconst statement = new PolicyStatement({\n  effect: Effect.ALLOW,\n  principals: [new ServicePrincipal(\"budgets.amazonaws.com\")],\n  actions: [\"SNS:Publish\"],\n  sid: \"Allow budget to publish to SNS\"\n});\ntopic.addToResourcePolicy(statement);\n\n// Setup the budget notifier and pass the ARN of the SNS topic\nnew BudgetNotifier(stack, \"notifier\", {\n  topicArn: topic.topicArn,\n  availabilityZones: [\"eu-central-1\"],\n  costCenter: \"myCostCenter\",\n  limit: 10,\n  unit: \"USD\",\n  threshold: 15,\n  notificationType: NotificationType.FORECASTED,\n});\n\n```\n\n## Contributions\n\n<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>\n  <tr>\n    <td align=\"center\"><a href=\"https://github.com/dedominicisfa\"><img src=\"https://avatars.githubusercontent.com/u/23100791?v=4\" width=\"100px;\" alt=\"\"/><br /><sub><b>dedominicisfa</b></sub></a></td>\n    <td align=\"center\"><a href=\"http://p6m7g8.github.io\"><img src=\"https://avatars.githubusercontent.com/u/34295?v=4\" width=\"100px;\" alt=\"\"/><br /><sub><b>Philip M. Gollucci</b></sub></a></td>\n  </tr>\n</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->\n\n<!-- ALL-CONTRIBUTORS-LIST:END -->\n\n## Links\n\n- [AWS Cloud Development Kit (CDK)](https://github.com/aws/aws-cdk)\n- [Cost Explorer filters](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-filtering.html)\n"
   },
   "repository": {
     "type": "git",
@@ -699,6 +726,6 @@
       "name": "TimeUnit"
     }
   },
-  "version": "0.3.3",
-  "fingerprint": "VkBT4dxikxmPRh7gvdpFg6l74doy3blXcJIyO9yAHHw="
+  "version": "0.0.0",
+  "fingerprint": "Zd27tEC82/27iO/L7cPZEdONBvg8FLTW8Qtmue2TQXs="
 }

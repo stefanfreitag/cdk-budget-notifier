@@ -11,18 +11,24 @@
     "test:compile": "npx projen test:compile",
     "test": "npx projen test",
     "build": "npx projen build",
-    "bump": "npx projen bump",
-    "release": "npx projen release",
     "test:watch": "npx projen test:watch",
     "test:update": "npx projen test:update",
-    "projen:upgrade": "npx projen projen:upgrade",
+    "bump": "npx projen bump",
+    "unbump": "npx projen unbump",
+    "publish:github": "npx projen publish:github",
+    "upgrade": "npx projen upgrade",
+    "upgrade-projen": "npx projen upgrade-projen",
+    "default": "npx projen default",
     "watch": "npx projen watch",
     "package": "npx projen package",
     "eslint": "npx projen eslint",
     "compat": "npx projen compat",
+    "publish:npm": "npx projen publish:npm",
+    "publish:maven": "npx projen publish:maven",
+    "publish:pypi": "npx projen publish:pypi",
     "docgen": "npx projen docgen",
-    "projen": "npx projen",
-    "start": "npx projen start"
+    "release": "npx projen release",
+    "projen": "npx projen"
   },
   "author": {
     "name": "Stefan Freitag",
@@ -30,7 +36,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.96.0",
+    "@aws-cdk/assert": "^1.122.0",
     "@types/jest": "^26.0.7",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
@@ -46,23 +52,24 @@
     "jsii-docgen": "^1.3.2",
     "jsii-pacmak": "^1.11.0",
     "json-schema": "^0.2.5",
-    "projen": "^0.17.17",
+    "npm-check-updates": "^11",
+    "projen": "^0.27.51",
     "standard-version": "^9",
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-budgets": "^1.96.0",
-    "@aws-cdk/aws-iam": "^1.96.0",
-    "@aws-cdk/aws-sns": "^1.96.0",
-    "@aws-cdk/core": "^1.96.0",
+    "@aws-cdk/aws-budgets": "^1.122.0",
+    "@aws-cdk/aws-iam": "^1.122.0",
+    "@aws-cdk/aws-sns": "^1.122.0",
+    "@aws-cdk/core": "^1.122.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.96.0",
-    "@aws-cdk/aws-iam": "^1.96.0",
-    "@aws-cdk/aws-sns": "^1.96.0",
-    "@aws-cdk/core": "^1.96.0"
+    "@aws-cdk/aws-budgets": "^1.122.0",
+    "@aws-cdk/aws-iam": "^1.122.0",
+    "@aws-cdk/aws-sns": "^1.122.0",
+    "@aws-cdk/core": "^1.122.0"
   },
   "bundledDependencies": [],
   "keywords": [
@@ -72,7 +79,7 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.3.6",
+  "version": "0.0.0",
   "jest": {
     "testMatch": [
       "**/__tests__/**/*.ts?(x)",
