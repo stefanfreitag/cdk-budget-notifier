@@ -369,7 +369,7 @@
     "stability": "stable"
   },
   "homepage": "https://github.com/stefan.freitag/projen-budget-notifier.git",
-  "jsiiVersion": "1.14.1 (build 828de8a)",
+  "jsiiVersion": "1.34.0 (build 9b72778)",
   "keywords": [
     "aws",
     "budget",
@@ -727,5 +727,5 @@
     }
   },
   "version": "0.0.0",
-  "fingerprint": "Zd27tEC82/27iO/L7cPZEdONBvg8FLTW8Qtmue2TQXs="
+  "fingerprint": "naNqxnAt7FthdggNwITU0z+R99qJ/Y7Iz6UgiSswpW8="
 }
