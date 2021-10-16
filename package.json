@@ -36,7 +36,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.122.0",
+    "@aws-cdk/assert": "^1.128.0",
     "@types/jest": "^26.0.24",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
@@ -59,17 +59,17 @@
     "typescript": "^3.9.10"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-budgets": "^1.122.0",
-    "@aws-cdk/aws-iam": "^1.122.0",
-    "@aws-cdk/aws-sns": "^1.122.0",
-    "@aws-cdk/core": "^1.122.0",
+    "@aws-cdk/aws-budgets": "^1.128.0",
+    "@aws-cdk/aws-iam": "^1.128.0",
+    "@aws-cdk/aws-sns": "^1.128.0",
+    "@aws-cdk/core": "^1.128.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.122.0",
-    "@aws-cdk/aws-iam": "^1.122.0",
-    "@aws-cdk/aws-sns": "^1.122.0",
-    "@aws-cdk/core": "^1.122.0"
+    "@aws-cdk/aws-budgets": "^1.128.0",
+    "@aws-cdk/aws-iam": "^1.128.0",
+    "@aws-cdk/aws-sns": "^1.128.0",
+    "@aws-cdk/core": "^1.128.0"
   },
   "bundledDependencies": [],
   "keywords": [
