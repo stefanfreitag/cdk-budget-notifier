@@ -369,7 +369,7 @@
     "stability": "stable"
   },
   "homepage": "https://github.com/stefan.freitag/projen-budget-notifier.git",
-  "jsiiVersion": "1.34.0 (build 9b72778)",
+  "jsiiVersion": "1.42.0 (build 5f6b62c)",
   "keywords": [
     "aws",
     "budget",
@@ -450,7 +450,8 @@
         "filename": "src/budget_notifier.ts",
         "line": 63
       },
-      "name": "BudgetNotifier"
+      "name": "BudgetNotifier",
+      "symbolId": "src/budget_notifier:BudgetNotifier"
     },
     "aws_budget_notifier.BudgetNotifierProps": {
       "assembly": "aws_budget_notifier",
@@ -663,7 +664,8 @@
             "primitive": "string"
           }
         }
-      ]
+      ],
+      "symbolId": "src/budget_notifier:BudgetNotifierProps"
     },
     "aws_budget_notifier.NotificationType": {
       "assembly": "aws_budget_notifier",
@@ -690,7 +692,8 @@
           "name": "FORECASTED"
         }
       ],
-      "name": "NotificationType"
+      "name": "NotificationType",
+      "symbolId": "src/NotificationType:NotificationType"
     },
     "aws_budget_notifier.TimeUnit": {
       "assembly": "aws_budget_notifier",
@@ -723,9 +726,10 @@
           "name": "ANNUALLY"
         }
       ],
-      "name": "TimeUnit"
+      "name": "TimeUnit",
+      "symbolId": "src/TimeUnit:TimeUnit"
     }
   },
   "version": "0.0.0",
-  "fingerprint": "xfD2K7Xp0JolavwPATw7zbg0URFp8TxHnl/jJHr1Oyo="
+  "fingerprint": "EVE1G9UvQql26Yka2dCkii2jcYYE9iLEJPZaqiDp1kY="
 }
