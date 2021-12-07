@@ -1,12 +1,12 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const { awscdk } = require('projen');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
-const project = new AwsCdkConstructLibrary({
+const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'stefan.freitag@udo.edu',
   authorName: 'Stefan Freitag',
   description: 'A simple AWS budget notifier.',
-  cdkVersion: '1.128.0',
+  cdkVersion: '1.134.0',
   name: 'aws_budget_notifier',
   repository: 'https://github.com/stefan.freitag/projen-budget-notifier.git',
   catalog: {
