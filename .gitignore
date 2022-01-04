@@ -49,4 +49,5 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+.history/
 !/.github/workflows/upgrade-master.yml

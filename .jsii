@@ -7,10 +7,10 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "^1.134.0",
-    "@aws-cdk/aws-iam": "^1.134.0",
-    "@aws-cdk/aws-sns": "^1.134.0",
-    "@aws-cdk/core": "^1.134.0",
+    "@aws-cdk/aws-budgets": "^1.137.0",
+    "@aws-cdk/aws-iam": "^1.137.0",
+    "@aws-cdk/aws-sns": "^1.137.0",
+    "@aws-cdk/core": "^1.137.0",
     "constructs": "^3.2.27"
   },
   "dependencyClosure": {
@@ -731,5 +731,5 @@
     }
   },
   "version": "0.0.0",
-  "fingerprint": "szoc1abZzGqg0OakxeC7QEZ2xEB/Q5TmwMF/uWnhIrw="
+  "fingerprint": "JNqfNwHpmnvJkMYi7JRxAOP6fetFk7eBLikkRw+qV/s="
 }

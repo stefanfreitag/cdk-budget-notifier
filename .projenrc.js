@@ -1,4 +1,5 @@
 const { awscdk } = require('projen');
+const { UpgradeDependenciesSchedule } = require('projen/lib/javascript');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
@@ -6,12 +7,17 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'stefan.freitag@udo.edu',
   authorName: 'Stefan Freitag',
   description: 'A simple AWS budget notifier.',
-  cdkVersion: '1.134.0',
+  cdkVersion: '1.137.0',
   name: 'aws_budget_notifier',
   repository: 'https://github.com/stefan.freitag/projen-budget-notifier.git',
   catalog: {
     twitter: 'stefanfreitag',
     announce: false,
+  },
+  depsUpgradeOptions: {
+    workflowOptions: {
+      schedule: UpgradeDependenciesSchedule.WEEKLY,
+    },
   },
   defaultReleaseBranch: 'master',
   codeCov: true,
@@ -40,6 +46,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
 
 });
+
+project.gitignore.addPatterns('.history/');
+project.npmignore.addPatterns('.history/');
 
 
 project.synth();
