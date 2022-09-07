@@ -7,16 +7,17 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'stefan.freitag@udo.edu',
   authorName: 'Stefan Freitag',
   description: 'A simple AWS budget notifier.',
-  cdkVersion: '1.137.0',
+  cdkVersion: '2.40.0',
   name: 'aws_budget_notifier',
-  repository: 'https://github.com/stefan.freitag/projen-budget-notifier.git',
+  repository: 'https://github.com/stefanfreitag/cdk-budget-notifier.git',
   catalog: {
     twitter: 'stefanfreitag',
     announce: false,
   },
   depsUpgradeOptions: {
     workflowOptions: {
-      schedule: UpgradeDependenciesSchedule.WEEKLY,
+      schedule: UpgradeDependenciesSchedule.MONTHLY,
+      secret: AUTOMATION_TOKEN,
     },
   },
   defaultReleaseBranch: 'master',
@@ -27,12 +28,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'aws',
     'cdk',
     'budget',
-  ],
-  cdkDependencies: [
-    '@aws-cdk/aws-budgets',
-    '@aws-cdk/aws-iam',
-    '@aws-cdk/aws-sns',
-    '@aws-cdk/core',
   ],
   publishToMaven: {
     javaPackage: 'io.github.stefanfreitag.cdk.budgetnotifier',

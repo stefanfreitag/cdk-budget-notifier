@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-import { PolicyStatement, Effect } from '@aws-cdk/aws-iam';
-import { ServicePrincipal } from '@aws-cdk/aws-iam/lib/principals';
-import { Topic } from '@aws-cdk/aws-sns';
+import { App, Stack } from 'aws-cdk-lib';
+import { PolicyStatement, Effect, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import { Topic } from 'aws-cdk-lib/aws-sns';
 
-import { App, Stack } from '@aws-cdk/core';
 import { BudgetNotifier } from './budget_notifier';
 import { NotificationType } from './NotificationType';
 

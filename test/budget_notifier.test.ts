@@ -1,5 +1,7 @@
-import { expect as expectCDK, haveResourceLike, ABSENT } from '@aws-cdk/assert';
-import { Stack } from '@aws-cdk/core';
+import { Stack } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+
+
 import { BudgetNotifier } from '../src/budget_notifier';
 import { NotificationType } from '../src/NotificationType';
 import { TimeUnit } from '../src/TimeUnit';
@@ -16,38 +18,37 @@ test('Budget with cost center and AZ filter', () => {
     threshold: 50,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        BudgetLimit: {
-          Amount: 10,
-          Unit: 'USD',
-        },
-        BudgetType: 'COST',
-
-        CostFilters: {
-          AZ: ['eu-central-1'],
-          TagKeyValue: ['user:Cost Center$myCostCenter'],
-        },
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    Budget: {
+      BudgetLimit: {
+        Amount: 10,
+        Unit: 'USD',
       },
-      NotificationsWithSubscribers: [
-        {
-          Notification: {
-            ComparisonOperator: 'GREATER_THAN',
-            NotificationType: 'ACTUAL',
-            Threshold: 50,
-            ThresholdType: 'PERCENTAGE',
-          },
-          Subscribers: [
-            {
-              Address: 'john.doe@foo.bar',
-              SubscriptionType: 'EMAIL',
-            },
-          ],
+      BudgetType: 'COST',
+
+      CostFilters: {
+        AZ: ['eu-central-1'],
+        TagKeyValue: ['user:Cost Center$myCostCenter'],
+      },
+    },
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: 'ACTUAL',
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
         },
-      ],
-    }),
-  );
+        Subscribers: [
+          {
+            Address: 'john.doe@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+        ],
+      },
+    ],
+  });
 });
 
 test('Budget with application, AZ, and cost center filter', () => {
@@ -63,41 +64,40 @@ test('Budget with application, AZ, and cost center filter', () => {
     threshold: 50,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        BudgetLimit: {
-          Amount: 10,
-          Unit: 'USD',
-        },
-        BudgetType: 'COST',
-
-        CostFilters: {
-          AZ: ['eu-central-1'],
-          TagKeyValue: [
-            'user:Application$HelloWorld',
-            'user:Cost Center$myCostCenter',
-          ],
-        },
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    Budget: {
+      BudgetLimit: {
+        Amount: 10,
+        Unit: 'USD',
       },
-      NotificationsWithSubscribers: [
-        {
-          Notification: {
-            ComparisonOperator: 'GREATER_THAN',
-            NotificationType: 'ACTUAL',
-            Threshold: 50,
-            ThresholdType: 'PERCENTAGE',
-          },
-          Subscribers: [
-            {
-              Address: 'john.doe@foo.bar',
-              SubscriptionType: 'EMAIL',
-            },
-          ],
+      BudgetType: 'COST',
+
+      CostFilters: {
+        AZ: ['eu-central-1'],
+        TagKeyValue: [
+          'user:Application$HelloWorld',
+          'user:Cost Center$myCostCenter',
+        ],
+      },
+    },
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: 'ACTUAL',
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
         },
-      ],
-    }),
-  );
+        Subscribers: [
+          {
+            Address: 'john.doe@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+        ],
+      },
+    ],
+  });
 });
 
 test('Budget for application and AZ filter', () => {
@@ -112,38 +112,37 @@ test('Budget for application and AZ filter', () => {
     threshold: 50,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        BudgetLimit: {
-          Amount: 10,
-          Unit: 'USD',
-        },
-        BudgetType: 'COST',
-
-        CostFilters: {
-          AZ: ['eu-central-1'],
-          TagKeyValue: ['user:Application$HelloWorld'],
-        },
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    Budget: {
+      BudgetLimit: {
+        Amount: 10,
+        Unit: 'USD',
       },
-      NotificationsWithSubscribers: [
-        {
-          Notification: {
-            ComparisonOperator: 'GREATER_THAN',
-            NotificationType: 'ACTUAL',
-            Threshold: 50,
-            ThresholdType: 'PERCENTAGE',
-          },
-          Subscribers: [
-            {
-              Address: 'john.doe@foo.bar',
-              SubscriptionType: 'EMAIL',
-            },
-          ],
+      BudgetType: 'COST',
+
+      CostFilters: {
+        AZ: ['eu-central-1'],
+        TagKeyValue: ['user:Application$HelloWorld'],
+      },
+    },
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: 'ACTUAL',
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
         },
-      ],
-    }),
-  );
+        Subscribers: [
+          {
+            Address: 'john.doe@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+        ],
+      },
+    ],
+  });
 });
 
 test('Budget for application, AZ and service filter', () => {
@@ -159,38 +158,37 @@ test('Budget for application, AZ and service filter', () => {
     threshold: 50,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        BudgetLimit: {
-          Amount: 10,
-          Unit: 'USD',
-        },
-        BudgetType: 'COST',
-
-        CostFilters: {
-          AZ: ['eu-central-1'],
-          TagKeyValue: ['user:Application$HelloWorld', 'user:Service$Lambda'],
-        },
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    Budget: {
+      BudgetLimit: {
+        Amount: 10,
+        Unit: 'USD',
       },
-      NotificationsWithSubscribers: [
-        {
-          Notification: {
-            ComparisonOperator: 'GREATER_THAN',
-            NotificationType: 'ACTUAL',
-            Threshold: 50,
-            ThresholdType: 'PERCENTAGE',
-          },
-          Subscribers: [
-            {
-              Address: 'john.doe@foo.bar',
-              SubscriptionType: 'EMAIL',
-            },
-          ],
+      BudgetType: 'COST',
+
+      CostFilters: {
+        AZ: ['eu-central-1'],
+        TagKeyValue: ['user:Application$HelloWorld', 'user:Service$Lambda'],
+      },
+    },
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: 'ACTUAL',
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
         },
-      ],
-    }),
-  );
+        Subscribers: [
+          {
+            Address: 'john.doe@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+        ],
+      },
+    ],
+  });
 });
 
 test('Budget for multiple AZ', () => {
@@ -204,37 +202,36 @@ test('Budget for multiple AZ', () => {
     threshold: 50,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        BudgetLimit: {
-          Amount: 10,
-          Unit: 'USD',
-        },
-        BudgetType: 'COST',
-
-        CostFilters: {
-          AZ: ['eu-central-1', 'eu-west-1'],
-        },
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    Budget: {
+      BudgetLimit: {
+        Amount: 10,
+        Unit: 'USD',
       },
-      NotificationsWithSubscribers: [
-        {
-          Notification: {
-            ComparisonOperator: 'GREATER_THAN',
-            NotificationType: 'ACTUAL',
-            Threshold: 50,
-            ThresholdType: 'PERCENTAGE',
-          },
-          Subscribers: [
-            {
-              Address: 'john.doe@foo.bar',
-              SubscriptionType: 'EMAIL',
-            },
-          ],
+      BudgetType: 'COST',
+
+      CostFilters: {
+        AZ: ['eu-central-1', 'eu-west-1'],
+      },
+    },
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: 'ACTUAL',
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
         },
-      ],
-    }),
-  );
+        Subscribers: [
+          {
+            Address: 'john.doe@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+        ],
+      },
+    ],
+  });
 });
 
 test('Support for multiple subscribers', () => {
@@ -250,40 +247,49 @@ test('Support for multiple subscribers', () => {
     threshold: 50,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      NotificationsWithSubscribers: [
-        {
-          Subscribers: [
-            {
-              Address: 'john.doe@foo.bar',
-              SubscriptionType: 'EMAIL',
-            },
-            {
-              Address: 'sally.sixpack@foo.bar',
-              SubscriptionType: 'EMAIL',
-            },
-          ],
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: 'ACTUAL',
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
         },
-      ],
-    }),
-  );
+        Subscribers: [
+          {
+            Address: 'john.doe@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+          {
+            Address: 'sally.sixpack@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+        ],
+      },
+    ],
+  });
 });
 
-test('Negative threshold is not allowed', () => {
-  const stack = new Stack();
+describe('Threshold values', () => {
+  test('Negative threshold is not allowed', () => {
+    const stack = new Stack();
 
-  expect(() => {
-    new BudgetNotifier(stack, 'notifier', {
-      recipients: ['john.doe@foo.bar'],
-      availabilityZones: ['eu-central-1'],
-      application: 'HelloWorld',
-      limit: 10,
-      unit: 'USD',
-      threshold: -5,
-    });
-  }).toThrowError(/Thresholds less than or equal to 0 are not allowed./);
+    expect(() => {
+      new BudgetNotifier(stack, 'notifier', {
+        recipients: ['john.doe@foo.bar'],
+        availabilityZones: ['eu-central-1'],
+        application: 'HelloWorld',
+        limit: 10,
+        unit: 'USD',
+        threshold: -5,
+      });
+    }).toThrowError(/Thresholds less than or equal to 0 are not allowed./);
+  });
+
 });
+
 
 test('Support for quarterly time unit', () => {
   const stack = new Stack();
@@ -299,22 +305,21 @@ test('Support for quarterly time unit', () => {
     timeUnit: TimeUnit.QUARTERLY,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        BudgetLimit: {
-          Amount: 10,
-          Unit: 'USD',
-        },
-        BudgetType: 'COST',
-        CostFilters: {
-          AZ: ['eu-central-1'],
-          TagKeyValue: ['user:Application$HelloWorld', 'user:Service$Lambda'],
-        },
-        TimeUnit: 'QUARTERLY',
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    Budget: {
+      BudgetLimit: {
+        Amount: 10,
+        Unit: 'USD',
       },
-    }),
-  );
+      BudgetType: 'COST',
+      CostFilters: {
+        AZ: ['eu-central-1'],
+        TagKeyValue: ['user:Application$HelloWorld', 'user:Service$Lambda'],
+      },
+      TimeUnit: 'QUARTERLY',
+    },
+  });
 });
 
 test('Support for default time unit', () => {
@@ -329,23 +334,21 @@ test('Support for default time unit', () => {
     unit: 'USD',
     threshold: 50,
   });
-
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        BudgetLimit: {
-          Amount: 10,
-          Unit: 'USD',
-        },
-        BudgetType: 'COST',
-        CostFilters: {
-          AZ: ['eu-central-1'],
-          TagKeyValue: ['user:Application$HelloWorld', 'user:Service$Lambda'],
-        },
-        TimeUnit: 'MONTHLY',
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    Budget: {
+      BudgetLimit: {
+        Amount: 10,
+        Unit: 'USD',
       },
-    }),
-  );
+      BudgetType: 'COST',
+      CostFilters: {
+        AZ: ['eu-central-1'],
+        TagKeyValue: ['user:Application$HelloWorld', 'user:Service$Lambda'],
+      },
+      TimeUnit: 'MONTHLY',
+    },
+  });
 });
 
 test('Support for notification type FORECASTED', () => {
@@ -361,20 +364,25 @@ test('Support for notification type FORECASTED', () => {
     notificationType: NotificationType.FORECASTED,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      NotificationsWithSubscribers: [
-        {
-          Notification: {
-            ComparisonOperator: 'GREATER_THAN',
-            NotificationType: 'FORECASTED',
-            Threshold: 50,
-            ThresholdType: 'PERCENTAGE',
-          },
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: 'FORECASTED',
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
         },
-      ],
-    }),
-  );
+        Subscribers: [
+          {
+            Address: 'john.doe@foo.bar',
+            SubscriptionType: 'EMAIL',
+          },
+        ],
+      },
+    ],
+  });
 });
 
 test('Exceeding maximum number of mail recipients gives an error', () => {
@@ -404,7 +412,7 @@ test('Exceeding maximum number of mail recipients gives an error', () => {
   }).toThrowError(/The maximum number of 10 e-mail recipients is exceeded./);
 });
 
-test('SNS topic is setup', () => {
+test('SNS topic is set up', () => {
   const stack = new Stack();
 
   new BudgetNotifier(stack, 'notifier', {
@@ -417,47 +425,23 @@ test('SNS topic is setup', () => {
     notificationType: NotificationType.FORECASTED,
   });
 
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      NotificationsWithSubscribers: [
-        {
-          Notification: {
-            ComparisonOperator: 'GREATER_THAN',
-            NotificationType: NotificationType.FORECASTED,
-            Threshold: 50,
-            ThresholdType: 'PERCENTAGE',
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Budgets::Budget', {
+    NotificationsWithSubscribers: [
+      {
+        Notification: {
+          ComparisonOperator: 'GREATER_THAN',
+          NotificationType: NotificationType.FORECASTED,
+          Threshold: 50,
+          ThresholdType: 'PERCENTAGE',
+        },
+        Subscribers: [
+          {
+            Address: 'sns-topic',
+            SubscriptionType: 'SNS',
           },
-          Subscribers: [
-            {
-              Address: 'sns-topic',
-              SubscriptionType: 'SNS',
-            },
-          ],
-        },
-      ],
-    }),
-  );
-});
-
-test('TagKeyValue field not added if no application or cost center is given', () => {
-  const stack = new Stack();
-
-  new BudgetNotifier(stack, 'notifier', {
-    recipients: ['john.doe@foo.bar'],
-    availabilityZones: ['eu-central-1'],
-    limit: 10,
-    unit: 'USD',
-    threshold: 50,
-  });
-
-  expectCDK(stack).to(
-    haveResourceLike('AWS::Budgets::Budget', {
-      Budget: {
-        CostFilters: {
-          AZ: ['eu-central-1'],
-          TagKeyValue: ABSENT,
-        },
+        ],
       },
-    }),
-  );
+    ],
+  });
 });
