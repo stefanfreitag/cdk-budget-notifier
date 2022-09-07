@@ -27,8 +27,8 @@ Name|Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
-__Extends__: [Construct](#aws-cdk-core-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
+__Extends__: [Construct](#constructs-construct)
 
 ### Initializer
 
@@ -39,7 +39,7 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 new BudgetNotifier(scope: Construct, id: string, props: BudgetNotifierProps)
 ```
 
-* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[BudgetNotifierProps](#aws-budget-notifier-budgetnotifierprops)</code>)  *No description*
   * **limit** (<code>number</code>)  The cost associated with the budget threshold. 
