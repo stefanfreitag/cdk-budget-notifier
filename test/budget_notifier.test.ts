@@ -2,9 +2,9 @@ import { Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 
 
-import { BudgetNotifier } from '../src/budget_notifier';
-import { NotificationType } from '../src/NotificationType';
-import { TimeUnit } from '../src/TimeUnit';
+import { BudgetNotifier } from '../src/budgetNotifier';
+import { NotificationType } from '../src/notificationType';
+import { TimeUnit } from '../src/timeUnit';
 
 test('Budget with cost center and AZ filter', () => {
   const stack = new Stack();

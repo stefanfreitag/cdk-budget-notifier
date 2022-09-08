@@ -3,8 +3,8 @@ import { App, Stack } from 'aws-cdk-lib';
 import { PolicyStatement, Effect, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 
-import { BudgetNotifier } from './budget_notifier';
-import { NotificationType } from './NotificationType';
+import { BudgetNotifier } from './budgetNotifier';
+import { NotificationType } from './notificationType';
 
 const app = new App();
 const stack = new Stack(app, 'BudgetNotifierStack');

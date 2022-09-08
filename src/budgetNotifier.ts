@@ -1,7 +1,7 @@
 import { CfnBudget } from 'aws-cdk-lib/aws-budgets';
 import { Construct } from 'constructs';
-import { NotificationType } from './NotificationType';
-import { TimeUnit } from './TimeUnit';
+import { NotificationType } from './notificationType';
+import { TimeUnit } from './timeUnit';
 
 /**
  * Configuration options of the {@link BudgetNotifier | BudgetNotifier}.
