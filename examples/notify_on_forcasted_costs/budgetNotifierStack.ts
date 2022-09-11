@@ -3,8 +3,8 @@ import { App, Stack } from 'aws-cdk-lib';
 import { PolicyStatement, Effect, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 
-import { BudgetNotifier } from './budgetNotifier';
-import { NotificationType } from './notificationType';
+import { BudgetNotifier } from '../../src/budgetNotifier';
+import { NotificationType } from '../../src/notificationType';
 
 const app = new App();
 const stack = new Stack(app, 'BudgetNotifierStack');
@@ -23,10 +23,13 @@ topic.addToResourcePolicy(statement);
 
 new BudgetNotifier(stack, 'notifier', {
   topicArn: topic.topicArn,
+  // Filter on the availability zone `eu-central-1`
   availabilityZones: ['eu-central-1'],
   costCenter: 'MyCostCenter',
+  // Limit and unit defining the budget limit
   limit: 10,
   unit: 'USD',
-  threshold: 15,
+  // When breaching the threshold of 85% of the 10 USD notifications will be send out.
+  threshold: 85,
   notificationType: NotificationType.FORECASTED,
 });

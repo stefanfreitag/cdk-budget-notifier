@@ -4,10 +4,21 @@ Setup a AWS Budget notification using AWS Cloud Development Kit (CDK).
 The construct supports notifying to
 
 - users via e-mail. Up to 10 e-mail addresses are supported
-- an SNS topic<br>
+- an SNS topic  
   The SNS topic needs to exist and publishing to the topic needs to be allowed.
 
-## Example usage in a CDK Stack
+
+## Properties
+
+[API.md](API.md)
+
+## Example usages
+
+### Notification on breaching forecasted cost
+
+This example is handy for keeping control over your private AWS Bill.
+For myself I aim to not spent more than 10 Euro / 10 USD per month and this alarm
+reminds me.
 
 ```javascript
 const app = new cdk.App();
@@ -27,11 +38,14 @@ topic.addToResourcePolicy(statement);
 // Setup the budget notifier and pass the ARN of the SNS topic
 new BudgetNotifier(stack, "notifier", {
   topicArn: topic.topicArn,
+  // Filter on the availability zone `eu-central-1`
   availabilityZones: ["eu-central-1"],
   costCenter: "myCostCenter",
+  // Limit and unit defining the budget limit
   limit: 10,
   unit: "USD",
-  threshold: 15,
+  // When breaching the threshold of 85% of the 10 USD notifications will be send out.
+  threshold: 85,
   notificationType: NotificationType.FORECASTED,
 });
 
