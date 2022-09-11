@@ -7,7 +7,6 @@ The construct supports notifying to
 - an SNS topic  
   The SNS topic needs to exist and publishing to the topic needs to be allowed.
 
-
 ## Properties
 
 [API.md](API.md)
