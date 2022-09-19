@@ -19,7 +19,7 @@ This example is handy for keeping control over your private AWS Bill.
 For myself I aim to not spent more than 10 Euro / 10 USD per month and this alarm
 reminds me.
 
-```javascript
+```typescript
 const app = new cdk.App();
 const stack = new Stack(app, "BudgetNotifierStack");
 
@@ -48,6 +48,29 @@ new BudgetNotifier(stack, "notifier", {
   notificationType: NotificationType.FORECASTED,
 });
 
+```
+
+### Notification via e-Mail
+
+As alternative to the notification via SNS you can specify a list of e-mail
+recipients.
+
+```typescript
+const app = new cdk.App();
+const stack = new Stack(app, "BudgetNotifierStack");
+
+new BudgetNotifier(stack, 'notifier', {
+  recipients: ['john.doe@foo.bar'],
+  // Filter on the availability zone `eu-central-1`
+  availabilityZones: ['eu-central-1'],
+  costCenter: 'MyCostCenter',
+  // Limit and unit defining the budget limit
+  limit: 10,
+  unit: 'USD',
+  // When breaching the threshold of 85% of the 10 USD notifications will be send out.
+  threshold: 85,
+  notificationType: NotificationType.FORECASTED,
+});
 ```
 
 ## Contributions
