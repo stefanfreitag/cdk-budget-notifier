@@ -11,7 +11,7 @@ Name|Description
 
 Name|Description
 ----|-----------
-[BudgetNotifierProps](#aws-budget-notifier-budgetnotifierprops)|Configuration options of the {@link BudgetNotifier | BudgetNotifier}.
+[BudgetNotifierProps](#aws-budget-notifier-budgetnotifierprops)|Configuration options of the {@link BudgetNotifier BudgetNotifier}.
 
 
 **Enums**
@@ -60,7 +60,7 @@ new BudgetNotifier(scope: Construct, id: string, props: BudgetNotifierProps)
 ## struct BudgetNotifierProps  <a id="aws-budget-notifier-budgetnotifierprops"></a>
 
 
-Configuration options of the {@link BudgetNotifier | BudgetNotifier}.
+Configuration options of the {@link BudgetNotifier BudgetNotifier}.
 
 
 
