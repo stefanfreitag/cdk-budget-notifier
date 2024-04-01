@@ -7,7 +7,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'stefan.freitag@udo.edu',
   authorName: 'Stefan Freitag',
   description: 'A simple AWS budget notifier.',
-  cdkVersion: '2.59.0',
+  cdkVersion: '2.134.0',
   name: 'aws_budget_notifier',
   repository: 'https://github.com/stefanfreitag/cdk-budget-notifier.git',
   catalog: {
@@ -38,7 +38,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
     module: 'cdk_budget_notifier',
     distName: 'cdk-budget-notifier',
   },
-
+  jsiiVersion: '5.x',
+  jest: {
+    jestVersion: '^29',
+  },
+  typescriptVersion: '5.3.3',
 
 });
 
