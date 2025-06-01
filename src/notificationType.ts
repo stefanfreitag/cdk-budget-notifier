@@ -1,5 +1,5 @@
 
 export enum NotificationType {
   ACTUAL = 'ACTUAL',
-  FORECASTED = 'FORECASTED'
+  FORECASTED = 'FORECASTED',
 }
