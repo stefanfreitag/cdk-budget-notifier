@@ -12,6 +12,7 @@ jobs:
       id-token: write
     outputs:
       self_mutation_happened: ${{ steps.self_mutation.outputs.self_mutation_happened }}
+      artifact_id: ${{ steps.upload_artifact.outputs.artifact-id }}
     env:
       CI: "true"
     steps:
@@ -58,6 +59,7 @@ jobs:
         run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
       - name: Upload artifact
+        id: upload_artifact
         uses: actions/upload-artifact@v7
         with:
           name: build-artifact
@@ -104,11 +106,11 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          package-manager-cache: "false"
+          package-manager-cache: false
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
-          name: build-artifact
+          artifact-ids: ${{ needs.build.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
@@ -143,11 +145,11 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          package-manager-cache: "false"
+          package-manager-cache: false
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
-          name: build-artifact
+          artifact-ids: ${{ needs.build.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
@@ -178,14 +180,14 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          package-manager-cache: "false"
+          package-manager-cache: false
       - uses: actions/setup-python@v6
         with:
           python-version: 3.x
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:
-          name: build-artifact
+          artifact-ids: ${{ needs.build.outputs.artifact_id }}
           path: dist
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
