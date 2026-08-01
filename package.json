@@ -8,6 +8,7 @@
   "scripts": {
     "build": "projen build",
     "bump": "projen bump",
+    "bump:releasable-commits": "projen bump:releasable-commits",
     "clobber": "projen clobber",
     "compat": "projen compat",
     "compile": "projen compile",
@@ -51,11 +52,11 @@
     "jest": "^27",
     "jest-junit": "^17",
     "jsii": "5.x",
-    "jsii-diff": "^1.132.0",
+    "jsii-diff": "^1.139.0",
     "jsii-docgen": "^10.5.0",
-    "jsii-pacmak": "^1.132.0",
+    "jsii-pacmak": "^1.139.0",
     "jsii-rosetta": "5.x",
-    "projen": "^0.99.70",
+    "projen": "^0.101.22",
     "ts-jest": "^27",
     "typescript": "5.3.3"
   },
@@ -70,6 +71,7 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "stability": "stable",
   "publishConfig": {
     "access": "public"
   },
@@ -111,12 +113,11 @@
     "preset": "ts-jest",
     "globals": {
       "ts-jest": {
-        "tsconfig": "tsconfig.dev.json"
+        "tsconfig": "test/tsconfig.json"
       }
     }
   },
   "types": "lib/index.d.ts",
-  "stability": "stable",
   "jsii": {
     "outdir": "dist",
     "targets": {
@@ -132,10 +133,8 @@
         "module": "cdk_budget_notifier"
       }
     },
-    "tsc": {
-      "outDir": "lib",
-      "rootDir": "src"
-    }
+    "tsconfig": "tsconfig.json",
+    "validateTsconfig": "strict"
   },
   "awscdkio": {
     "twitter": "stefanfreitag",
